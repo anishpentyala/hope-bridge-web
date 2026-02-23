@@ -158,6 +158,19 @@ export default function StoryProject() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-blue-50 to-white relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-0 opacity-60"
+        style={{
+          backgroundImage: `
+            linear-gradient(to bottom, rgba(96, 165, 250, 0.22) 1px, transparent 1px),
+            linear-gradient(to right, rgba(96, 165, 250, 0.22) 1px, transparent 1px),
+            linear-gradient(to right, rgba(96, 165, 250, 0.22) 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 56px, 120px 112px, 120px 112px',
+          backgroundPosition: '0 0, 0 0, 60px 56px'
+        }}
+      />
       <BackgroundElements />
       {/* Hero Section - ENHANCED */}
       <section className="relative pt-32 pb-28 px-6 lg:px-8">
