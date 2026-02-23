@@ -158,6 +158,19 @@ export default function StoryProject() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-blue-50 to-white relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-0 opacity-60"
+        style={{
+          backgroundImage: `
+            linear-gradient(to bottom, rgba(96, 165, 250, 0.22) 1px, transparent 1px),
+            linear-gradient(to right, rgba(96, 165, 250, 0.22) 1px, transparent 1px),
+            linear-gradient(to right, rgba(96, 165, 250, 0.22) 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 56px, 120px 112px, 120px 112px',
+          backgroundPosition: '0 0, 0 0, 60px 56px'
+        }}
+      />
       <BackgroundElements />
       {/* Hero Section - ENHANCED */}
       <section className="relative pt-32 pb-28 px-6 lg:px-8">
@@ -431,55 +444,6 @@ export default function StoryProject() {
           </div>
           </section>
 
-          {/* Digital Brick Wall - ENHANCED */}
-          <section className="relative py-32 px-6 lg:px-8 bg-gradient-to-b from-blue-50 via-gray-50 to-white">
-          <div className="max-w-7xl mx-auto">
-          <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="text-center mb-20">
-           <h2 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6">
-             Your Story Builds Our{' '}
-             <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">Wall</span>
-           </h2>
-           <p className="text-gray-700 text-2xl max-w-3xl mx-auto font-semibold">
-             Every story shared is a brick in our community wall of resilience
-           </p>
-          </motion.div>
-
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-4 lg:gap-5">
-           {[...Array(50)].map((_, i) => (
-             <motion.div
-               key={i}
-               initial={{ opacity: 0, scale: 0.8, rotateZ: (Math.random() - 0.5) * 10 }}
-               whileInView={{ opacity: 1, scale: 1, rotateZ: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.4, delay: i * 0.02 }}
-               whileHover={{ scale: 1.15, rotateZ: (Math.random() - 0.5) * 8, zIndex: 10 }}
-               className={`aspect-square rounded-xl border-4 shadow-2xl cursor-pointer transition-all ${
-                 [
-                   'bg-gradient-to-br from-blue-600 to-blue-700 border-blue-400',
-                   'bg-gradient-to-br from-blue-500 to-blue-600 border-blue-300',
-                   'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-600',
-                   'bg-gradient-to-br from-blue-700 to-gray-800 border-blue-500',
-                   'bg-gradient-to-br from-blue-800 to-blue-900 border-blue-600'
-                 ][i % 5]
-               }`}>
-             </motion.div>
-           ))}
-          </div>
-
-          <motion.p
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ delay: 0.5 }}
-           className="text-center text-gray-800 text-xl font-bold mt-16 max-w-3xl mx-auto">
-           Each brick represents the courage it takes to share your story. Together, we're building a wall of hope.
-          </motion.p>
-          </div>
-          </section>
           </div>);
 
           }
