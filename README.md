@@ -67,3 +67,55 @@ Open [Base44.com](http://Base44.com) and click on Publish.
 Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
 
 Support: [https://app.base44.com/support](https://app.base44.com/support)
+
+
+## Supabase setup for global Story Sharing (no Base44 backend required)
+
+If you want stories to be visible to everyone, set these env vars:
+
+```
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Create table `public.stories` in Supabase SQL editor:
+
+```sql
+create table if not exists public.stories (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  author_name text not null,
+  content text not null,
+  topic text not null,
+  media_urls jsonb not null default '[]'::jsonb,
+  audio_url text,
+  summary text,
+  tags jsonb not null default '[]'::jsonb,
+  status text not null default 'approved',
+  comments_count integer not null default 0,
+  likes integer not null default 0,
+  featured boolean not null default false,
+  source text not null default 'supabase',
+  created_date timestamptz not null default now()
+);
+
+alter table public.stories enable row level security;
+
+create policy "stories are readable by everyone"
+  on public.stories
+  for select
+  using (true);
+
+create policy "stories are insertable by everyone"
+  on public.stories
+  for insert
+  with check (true);
+
+create policy "stories likes are updatable by everyone"
+  on public.stories
+  for update
+  using (true)
+  with check (true);
+```
+
+The app still keeps localStorage fallback for offline/local-only mode.

@@ -36,6 +36,11 @@ export default function StoryCard({ story, onLike, isLiked }) {
     family_pressures: 'bg-white'
   };
 
+  const safeTopic = topicLabels[story.topic] ? story.topic : 'family_pressures';
+  const authorName = (story.author_name || 'Anonymous').trim() || 'Anonymous';
+  const createdDate = story.created_date ? new Date(story.created_date) : new Date();
+  const displayDate = Number.isNaN(createdDate.getTime()) ? new Date() : createdDate;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -45,7 +50,7 @@ export default function StoryCard({ story, onLike, isLiked }) {
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className={`relative overflow-hidden rounded-2xl border transition-all ${topicBg[story.topic]} ${isHovered ? 'border-blue-400 shadow-xl' : 'border-blue-200'}`}>
+      className={`relative overflow-hidden rounded-2xl border transition-all ${topicBg[safeTopic]} ${isHovered ? 'border-blue-400 shadow-xl' : 'border-blue-200'}`}>
 
       {/* Header */}
       <div className="relative p-6 border-b border-blue-100">
@@ -54,20 +59,20 @@ export default function StoryCard({ story, onLike, isLiked }) {
             <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight break-words">{story.title}</h3>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white font-bold text-sm">
-                {story.author_name.charAt(0).toUpperCase()}
+                {authorName.charAt(0).toUpperCase()}
               </div>
-              <p className="text-sm text-gray-600 truncate">{story.author_name}</p>
+              <p className="text-sm text-gray-600 truncate">{authorName}</p>
             </div>
           </div>
           <motion.span
             whileHover={{ scale: 1.05 }}
-            className={`px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r ${topicGradients[story.topic]} text-white shadow-md whitespace-nowrap ml-2`}>
-            {topicLabels[story.topic]}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r ${topicGradients[safeTopic]} text-white shadow-md whitespace-nowrap ml-2`}>
+            {topicLabels[safeTopic]}
           </motion.span>
         </div>
         <div className="flex items-center gap-2 text-xs text-gray-500 mt-3">
           <Calendar className="w-3 h-3" />
-          {format(new Date(story.created_date), 'MMM d, yyyy')}
+          {format(displayDate, 'MMM d, yyyy')}
         </div>
       </div>
 
@@ -175,13 +180,13 @@ export default function StoryCard({ story, onLike, isLiked }) {
                   <h3 className="text-2xl font-bold text-gray-900 mb-3 break-words">{story.title}</h3>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white font-bold">
-                      {story.author_name.charAt(0).toUpperCase()}
+                      {authorName.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{story.author_name}</p>
+                      <p className="text-sm font-medium text-gray-900">{authorName}</p>
                       <div className="flex items-center gap-2 text-xs text-gray-500">
                         <Calendar className="w-3 h-3" />
-                        {format(new Date(story.created_date), 'MMM d, yyyy')}
+                        {format(displayDate, 'MMM d, yyyy')}
                       </div>
                     </div>
                   </div>
@@ -223,8 +228,8 @@ export default function StoryCard({ story, onLike, isLiked }) {
 
                 {/* Topic Badge */}
                 <div className="flex justify-center pt-4">
-                  <span className={`px-4 py-2 rounded-full text-sm font-bold bg-gradient-to-r ${topicGradients[story.topic]} text-white shadow-md`}>
-                    {topicLabels[story.topic]}
+                  <span className={`px-4 py-2 rounded-full text-sm font-bold bg-gradient-to-r ${topicGradients[safeTopic]} text-white shadow-md`}>
+                    {topicLabels[safeTopic]}
                   </span>
                 </div>
               </div>

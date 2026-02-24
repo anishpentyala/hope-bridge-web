@@ -11,6 +11,7 @@ import FeaturedStories from '@/components/story/FeaturedStories';
 import StoryInsights from '@/components/story/StoryInsights';
 import StorySearchFilters from '@/components/story/StorySearchFilters';
 import BackgroundElements from '@/components/BackgroundElements';
+import { createLocalStory, listLocalStories, listSupabaseStories, mergeStories, updateLocalStoryLikes, updateSupabaseStoryLikes } from '@/lib/localStories';
 
 export default function StoryProject() {
   const [stories, setStories] = useState([]);
@@ -28,18 +29,35 @@ export default function StoryProject() {
   // Load stories
   useEffect(() => {
     const loadStories = async () => {
-      try {
-        const allStories = await base44.entities.Story.filter({ status: 'approved' }, '-created_date');
-        setStories(allStories);
-        setFilteredStories(allStories);
-      } catch (error) {
-        console.error('Failed to load stories:', error);
-      } finally {
-        setIsLoading(false);
-      }
+      const localStories = listLocalStories();
+
+      const [supabaseStories, base44Stories] = await Promise.all([
+        listSupabaseStories(),
+        base44.entities.Story.filter({ status: 'approved' }, '-created_date').catch((error) => {
+          console.error('Failed to load Base44 stories:', error);
+          return [];
+        })
+      ]);
+
+      const remoteStories = [...supabaseStories, ...base44Stories];
+      const allStories = mergeStories(remoteStories, localStories);
+      setStories(allStories);
+      setFilteredStories(allStories);
+      setIsLoading(false);
     };
     loadStories();
   }, []);
+
+  const reloadStories = async () => {
+    const localStories = listLocalStories();
+    const [supabaseStories, base44Stories] = await Promise.all([
+      listSupabaseStories(),
+      base44.entities.Story.filter({ status: 'approved' }, '-created_date').catch(() => [])
+    ]);
+    const allStories = mergeStories([...supabaseStories, ...base44Stories], localStories);
+    setStories(allStories);
+    setFilteredStories(allStories);
+  };
 
   // Handle file selection
   const handleFileSelect = (e) => {
@@ -63,31 +81,25 @@ export default function StoryProject() {
 
     setIsAnalyzing(true);
     setUploadError('');
+
     try {
-      const uploadResponse = await base44.integrations.Core.UploadFile({
-        file: selectedFile
+      await createLocalStory({
+        title: `Photo Story - ${new Date().toLocaleDateString()}`,
+        author_name: 'Anonymous',
+        content: 'Story shared via uploaded photo. Text extraction is not enabled in this mode yet.',
+        topic: 'family_pressures',
+        mediaFiles: [selectedFile]
       });
 
-      const response = await base44.functions.invoke('analyzePhysicalStory', {
-        image_url: uploadResponse.file_url
-      });
+      setUploadSuccess(true);
+      await reloadStories();
 
-      if (response?.data?.success) {
-        setUploadSuccess(true);
-        setTimeout(() => {
-          setUploadMode(null);
-          setUploadSuccess(false);
-          setSelectedFile(null);
-          setPreview(null);
-          // Reload stories
-          base44.entities.Story.filter({ status: 'approved' }, '-created_date').then(allStories => {
-            setStories(allStories);
-            setFilteredStories(allStories);
-          });
-        }, 2000);
-      } else {
-        setUploadError(response?.data?.error || 'Failed to analyze image. Please ensure the image contains clear text.');
-      }
+      setTimeout(() => {
+        setUploadMode(null);
+        setUploadSuccess(false);
+        setSelectedFile(null);
+        setPreview(null);
+      }, 1500);
     } catch (err) {
       console.error('Photo upload error:', err);
       setUploadError('Failed to process image. Please try again with a clear photo of your story.');
@@ -116,8 +128,14 @@ export default function StoryProject() {
         setStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         setFilteredStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         
-        // Update backend
-        await base44.entities.Story.update(storyId, { likes: newLikes });
+        // Persist like update
+        updateLocalStoryLikes(storyId, newLikes);
+        await updateSupabaseStoryLikes(storyId, newLikes);
+        try {
+          await base44.entities.Story.update(storyId, { likes: newLikes });
+        } catch (error) {
+          console.error('Failed to update backend like:', error);
+        }
       } else {
         // Like
         const newLikes = story.likes + 1;
@@ -127,8 +145,14 @@ export default function StoryProject() {
         setStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         setFilteredStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         
-        // Update backend
-        await base44.entities.Story.update(storyId, { likes: newLikes });
+        // Persist like update
+        updateLocalStoryLikes(storyId, newLikes);
+        await updateSupabaseStoryLikes(storyId, newLikes);
+        try {
+          await base44.entities.Story.update(storyId, { likes: newLikes });
+        } catch (error) {
+          console.error('Failed to update backend like:', error);
+        }
       }
     } catch (error) {
       console.error('Failed to update like:', error);
@@ -142,8 +166,9 @@ export default function StoryProject() {
   const featuredStories = stories.filter((s) => s.featured).slice(0, 2);
   const allOtherStories = topicFilteredStories.filter((s) => !s.featured);
 
-  const topicCounts = stories.reduce((acc, s) => {
-    acc[s.topic] = (acc[s.topic] || 0) + 1;
+  const topicCounts = stories.reduce((acc, story) => {
+    const topic = story.topic || 'N/A';
+    acc[topic] = (acc[topic] || 0) + 1;
     return acc;
   }, {});
   
@@ -152,12 +177,22 @@ export default function StoryProject() {
   const stats = {
     total: stories.length,
     topTopic: topTopicEntry ? topTopicEntry[0] : 'N/A',
-    totalLikes: stories.reduce((sum, s) => sum + s.likes, 0),
-    totalComments: stories.reduce((sum, s) => sum + s.comments_count, 0)
+    totalLikes: stories.reduce((sum, story) => sum + Number(story.likes || 0), 0),
+    totalComments: stories.reduce((sum, story) => sum + Number(story.comments_count || 0), 0)
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-blue-50 to-white relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-0 opacity-70"
+        style={{
+          backgroundColor: '#b7d7ef',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120' viewBox='0 0 240 120'%3E%3Crect width='240' height='120' fill='%23b7d7ef'/%3E%3Crect x='4' y='4' width='112' height='52' rx='2' fill='%23f5f5f7'/%3E%3Crect x='124' y='4' width='112' height='52' rx='2' fill='%23f5f5f7'/%3E%3Crect x='-56' y='64' width='112' height='52' rx='2' fill='%23f5f5f7'/%3E%3Crect x='64' y='64' width='112' height='52' rx='2' fill='%23f5f5f7'/%3E%3Crect x='184' y='64' width='112' height='52' rx='2' fill='%23f5f5f7'/%3E%3C/svg%3E")`,
+          backgroundSize: '240px 120px',
+          backgroundRepeat: 'repeat'
+        }}
+      />
       <BackgroundElements />
       {/* Hero Section - ENHANCED */}
       <section className="relative pt-32 pb-28 px-6 lg:px-8">
@@ -292,7 +327,7 @@ export default function StoryProject() {
                     {isAnalyzing ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Analyzing Image...
+                        Uploading Story...
                       </>
                     ) : (
                       'Add Story'
@@ -300,7 +335,7 @@ export default function StoryProject() {
                   </Button>
 
                   <p className="text-xs text-gray-600 mt-4 text-center">
-                    The AI will automatically extract the story text from your photo.
+                    Your photo will be posted as a story card. You can add full text using Write Story Online.
                   </p>
                 </>
               )}
@@ -431,55 +466,6 @@ export default function StoryProject() {
           </div>
           </section>
 
-          {/* Digital Brick Wall - ENHANCED */}
-          <section className="relative py-32 px-6 lg:px-8 bg-gradient-to-b from-blue-50 via-gray-50 to-white">
-          <div className="max-w-7xl mx-auto">
-          <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="text-center mb-20">
-           <h2 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6">
-             Your Story Builds Our{' '}
-             <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">Wall</span>
-           </h2>
-           <p className="text-gray-700 text-2xl max-w-3xl mx-auto font-semibold">
-             Every story shared is a brick in our community wall of resilience
-           </p>
-          </motion.div>
-
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-4 lg:gap-5">
-           {[...Array(50)].map((_, i) => (
-             <motion.div
-               key={i}
-               initial={{ opacity: 0, scale: 0.8, rotateZ: (Math.random() - 0.5) * 10 }}
-               whileInView={{ opacity: 1, scale: 1, rotateZ: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.4, delay: i * 0.02 }}
-               whileHover={{ scale: 1.15, rotateZ: (Math.random() - 0.5) * 8, zIndex: 10 }}
-               className={`aspect-square rounded-xl border-4 shadow-2xl cursor-pointer transition-all ${
-                 [
-                   'bg-gradient-to-br from-blue-600 to-blue-700 border-blue-400',
-                   'bg-gradient-to-br from-blue-500 to-blue-600 border-blue-300',
-                   'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-600',
-                   'bg-gradient-to-br from-blue-700 to-gray-800 border-blue-500',
-                   'bg-gradient-to-br from-blue-800 to-blue-900 border-blue-600'
-                 ][i % 5]
-               }`}>
-             </motion.div>
-           ))}
-          </div>
-
-          <motion.p
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ delay: 0.5 }}
-           className="text-center text-gray-800 text-xl font-bold mt-16 max-w-3xl mx-auto">
-           Each brick represents the courage it takes to share your story. Together, we're building a wall of hope.
-          </motion.p>
-          </div>
-          </section>
           </div>);
 
           }
