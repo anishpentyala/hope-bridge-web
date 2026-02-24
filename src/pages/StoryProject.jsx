@@ -25,6 +25,7 @@ export default function StoryProject() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState('');
+  const [photoTopic, setPhotoTopic] = useState('');
 
   // Load stories
   useEffect(() => {
@@ -79,6 +80,11 @@ export default function StoryProject() {
       return;
     }
 
+    if (!photoTopic) {
+      setUploadError('Please choose a topic');
+      return;
+    }
+
     setIsAnalyzing(true);
     setUploadError('');
 
@@ -87,7 +93,7 @@ export default function StoryProject() {
         title: `Photo Story - ${new Date().toLocaleDateString()}`,
         author_name: 'Anonymous',
         content: 'Story shared via uploaded photo. Text extraction is not enabled in this mode yet.',
-        topic: 'family_pressures',
+        topic: photoTopic,
         mediaFiles: [selectedFile]
       });
 
@@ -99,6 +105,7 @@ export default function StoryProject() {
         setUploadSuccess(false);
         setSelectedFile(null);
         setPreview(null);
+        setPhotoTopic('');
       }, 1500);
     } catch (err) {
       console.error('Photo upload error:', err);
@@ -282,6 +289,7 @@ export default function StoryProject() {
                         setUploadMode(null);
                         setSelectedFile(null);
                         setPreview(null);
+                        setPhotoTopic('');
                         setUploadError('');
                       }}
                       className="text-gray-900">
@@ -320,9 +328,23 @@ export default function StoryProject() {
                     </div>
                   </label>
 
+
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">Topic *</label>
+                    <select
+                      value={photoTopic}
+                      onChange={(e) => setPhotoTopic(e.target.value)}
+                      className="w-full rounded-xl border border-blue-200 bg-white px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                      <option value="">Choose a topic</option>
+                      <option value="family_pressures">Disconnect Between Teens & Families</option>
+                      <option value="academic_stress">Academic Pressure & Success</option>
+                      <option value="cultural_identity">Embracing Cultural Identity</option>
+                    </select>
+                  </div>
+
                   <Button
                     onClick={handlePhotoSubmit}
-                    disabled={!selectedFile || isAnalyzing}
+                    disabled={!selectedFile || !photoTopic || isAnalyzing}
                     className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-full py-3 font-semibold">
                     {isAnalyzing ? (
                       <>

@@ -33,7 +33,6 @@ export default function StorySubmitForm() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
-    author_name: '',
     content: '',
     topic: ''
   });
@@ -68,7 +67,7 @@ export default function StorySubmitForm() {
     e.preventDefault();
     setError('');
 
-    if (!formData.title.trim() || !formData.author_name.trim() || !formData.content.trim() || !formData.topic) {
+    if (!formData.title.trim() || !formData.content.trim() || !formData.topic) {
       setError('Please fill in all fields');
       return;
     }
@@ -85,7 +84,7 @@ export default function StorySubmitForm() {
       const payload = {
         ...formData,
         title: formData.title.trim(),
-        author_name: formData.author_name.trim(),
+        author_name: 'Anonymous',
         content: formData.content.trim(),
         media_urls: [],
         audio_url: null
@@ -184,7 +183,7 @@ export default function StorySubmitForm() {
           <Button
             onClick={() => {
               setIsSuccess(false);
-              setFormData({ title: '', author_name: '', content: '', topic: '' });
+              setFormData({ title: '', content: '', topic: '' });
               setSelectedTopic(null);
             }}
             className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">
@@ -399,7 +398,7 @@ export default function StorySubmitForm() {
                   </Button>
                   <Button
                   type="submit"
-                  disabled={isSubmitting || !formData.title.trim() || !formData.author_name.trim() || !formData.content.trim()}
+                  disabled={isSubmitting || !formData.title.trim() || !formData.content.trim()}
                   className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-full flex-1">
 
                     {isSubmitting ?
