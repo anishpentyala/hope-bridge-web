@@ -11,7 +11,7 @@ import FeaturedStories from '@/components/story/FeaturedStories';
 import StoryInsights from '@/components/story/StoryInsights';
 import StorySearchFilters from '@/components/story/StorySearchFilters';
 import BackgroundElements from '@/components/BackgroundElements';
-import { listLocalStories, listSupabaseStories, mergeStories, updateLocalStoryLikes, updateSupabaseStoryLikes } from '@/lib/localStories';
+import { createLocalStory, listLocalStories, listSupabaseStories, mergeStories, updateLocalStoryLikes, updateSupabaseStoryLikes } from '@/lib/localStories';
 
 export default function StoryProject() {
   const [stories, setStories] = useState([]);
@@ -48,6 +48,17 @@ export default function StoryProject() {
     loadStories();
   }, []);
 
+  const reloadStories = async () => {
+    const localStories = listLocalStories();
+    const [supabaseStories, base44Stories] = await Promise.all([
+      listSupabaseStories(),
+      base44.entities.Story.filter({ status: 'approved' }, '-created_date').catch(() => [])
+    ]);
+    const allStories = mergeStories([...supabaseStories, ...base44Stories], localStories);
+    setStories(allStories);
+    setFilteredStories(allStories);
+  };
+
   // Handle file selection
   const handleFileSelect = (e) => {
     const file = e.target.files?.[0];
@@ -70,39 +81,25 @@ export default function StoryProject() {
 
     setIsAnalyzing(true);
     setUploadError('');
+
     try {
-      const uploadResponse = await base44.integrations.Core.UploadFile({
-        file: selectedFile
+      await createLocalStory({
+        title: `Photo Story - ${new Date().toLocaleDateString()}`,
+        author_name: 'Anonymous',
+        content: 'Story shared via uploaded photo. Text extraction is not enabled in this mode yet.',
+        topic: 'family_pressures',
+        mediaFiles: [selectedFile]
       });
 
-      const response = await base44.functions.invoke('analyzePhysicalStory', {
-        image_url: uploadResponse.file_url
-      });
+      setUploadSuccess(true);
+      await reloadStories();
 
-      if (response?.data?.success) {
-        setUploadSuccess(true);
-        setTimeout(() => {
-          setUploadMode(null);
-          setUploadSuccess(false);
-          setSelectedFile(null);
-          setPreview(null);
-          // Reload stories
-          const localStories = listLocalStories();
-          Promise.all([
-            listSupabaseStories(),
-            base44.entities.Story.filter({ status: 'approved' }, '-created_date').catch(() => [])
-          ]).then(([supabaseStories, base44Stories]) => {
-            const allStories = mergeStories([...supabaseStories, ...base44Stories], localStories);
-            setStories(allStories);
-            setFilteredStories(allStories);
-          }).catch(() => {
-            setStories(localStories);
-            setFilteredStories(localStories);
-          });
-        }, 2000);
-      } else {
-        setUploadError(response?.data?.error || 'Failed to analyze image. Please ensure the image contains clear text.');
-      }
+      setTimeout(() => {
+        setUploadMode(null);
+        setUploadSuccess(false);
+        setSelectedFile(null);
+        setPreview(null);
+      }, 1500);
     } catch (err) {
       console.error('Photo upload error:', err);
       setUploadError('Failed to process image. Please try again with a clear photo of your story.');
@@ -330,7 +327,7 @@ export default function StoryProject() {
                     {isAnalyzing ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Analyzing Image...
+                        Uploading Story...
                       </>
                     ) : (
                       'Add Story'
@@ -338,7 +335,7 @@ export default function StoryProject() {
                   </Button>
 
                   <p className="text-xs text-gray-600 mt-4 text-center">
-                    The AI will automatically extract the story text from your photo.
+                    Your photo will be posted as a story card. You can add full text using Write Story Online.
                   </p>
                 </>
               )}
