@@ -301,6 +301,15 @@ export default function StorySubmitForm() {
                 </div>
 
                 <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">Your Name (or Anonymous) *</label>
+                  <Input
+                  value={formData.author_name}
+                  onChange={(e) => setFormData({ ...formData, author_name: e.target.value })}
+                  placeholder="How should we display your name?"
+                  className="rounded-xl border-blue-200 text-gray-900" />
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium text-gray-900 mb-2">Your Story *</label>
                   <Textarea
                   value={formData.content}
