@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Lightbulb, Heart, Loader2, CheckCircle2, AlertCircle, Image, Volume2, X } from 'lucide-react';
+import { BookOpen, Lightbulb, Heart, Loader2, CheckCircle2, AlertCircle, Image, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -38,7 +38,6 @@ export default function StorySubmitForm() {
     topic: ''
   });
   const [mediaFiles, setMediaFiles] = useState([]);
-  const [audioFile, setAudioFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -51,13 +50,6 @@ export default function StorySubmitForm() {
   const handleMediaSelect = (e) => {
     const files = Array.from(e.target.files || []);
     setMediaFiles((prev) => [...prev, ...files]);
-  };
-
-  const handleAudioSelect = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setAudioFile(file);
-    }
   };
 
   const removeMedia = (index) => {
@@ -90,7 +82,7 @@ export default function StorySubmitForm() {
 
     setIsSubmitting(true);
     try {
-      const hasMedia = mediaFiles.length > 0 || Boolean(audioFile);
+      const hasMedia = mediaFiles.length > 0;
 
       const payload = {
         ...formData,
@@ -113,10 +105,6 @@ export default function StorySubmitForm() {
           multipartFormData.append('media', file);
         });
 
-        if (audioFile) {
-          multipartFormData.append('audio', audioFile);
-        }
-
         try {
           response = await base44.request('/functions/submitStoryWithMedia', {
             method: 'POST',
@@ -134,8 +122,7 @@ export default function StorySubmitForm() {
               author_name: payload.author_name,
               content: payload.content,
               topic: payload.topic,
-              mediaFiles,
-              audioFile
+              mediaFiles
             });
             response = { success: true, story };
           }
@@ -366,33 +353,6 @@ export default function StorySubmitForm() {
                             </button>
                           </motion.div>
                     )}
-                      </div>
-                  }
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-3">Add Audio (Optional)</label>
-                    <label className="block">
-                      <input
-                      type="file"
-                      accept="audio/*"
-                      onChange={handleAudioSelect}
-                      className="hidden" />
-
-                      <div className="border-2 border-dashed border-blue-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition">
-                        <Volume2 className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600">Click to add audio</p>
-                      </div>
-                    </label>
-                    {audioFile &&
-                  <div className="bg-blue-50 rounded px-3 py-2 text-sm text-gray-700 mt-2 flex items-center justify-between">
-                        {audioFile.name}
-                        <button
-                      type="button"
-                      onClick={() => setAudioFile(null)}
-                      className="text-gray-500 hover:text-red-500">
-                          <X className="w-4 h-4" />
-                        </button>
                       </div>
                   }
                   </div>

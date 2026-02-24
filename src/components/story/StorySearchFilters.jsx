@@ -6,11 +6,8 @@ import { Button } from '@/components/ui/button';
 
 export default function StorySearchFilters({ stories, onFiltersChange }) {
   const [keyword, setKeyword] = useState('');
-  const [selectedAuthor, setSelectedAuthor] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-
-  const uniqueAuthors = [...new Set(stories.map((s) => s.author_name))].sort();
 
   const applyFilters = () => {
     const filtered = stories.filter((story) => {
@@ -18,13 +15,11 @@ export default function StorySearchFilters({ stories, onFiltersChange }) {
       story.title.toLowerCase().includes(keyword.toLowerCase()) ||
       story.content.toLowerCase().includes(keyword.toLowerCase());
 
-      const matchesAuthor = selectedAuthor === '' || story.author_name === selectedAuthor;
-
       const storyDate = new Date(story.created_date);
       const matchesStartDate = startDate === '' || storyDate >= new Date(startDate);
       const matchesEndDate = endDate === '' || storyDate <= new Date(endDate);
 
-      return matchesKeyword && matchesAuthor && matchesStartDate && matchesEndDate;
+      return matchesKeyword && matchesStartDate && matchesEndDate;
     });
 
     onFiltersChange(filtered);
@@ -40,7 +35,6 @@ export default function StorySearchFilters({ stories, onFiltersChange }) {
 
   const handleReset = () => {
     setKeyword('');
-    setSelectedAuthor('');
     setStartDate('');
     setEndDate('');
     onFiltersChange(stories);
@@ -48,7 +42,7 @@ export default function StorySearchFilters({ stories, onFiltersChange }) {
 
   React.useEffect(() => {
     applyFilters();
-  }, [selectedAuthor, startDate, endDate]);
+  }, [startDate, endDate]);
 
   return (
     <motion.div
@@ -78,21 +72,7 @@ export default function StorySearchFilters({ stories, onFiltersChange }) {
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Author Filter */}
-        <div>
-          <label className="text-slate-950 mb-2 text-xs font-semibold block">Author</label>
-          <select
-            value={selectedAuthor}
-            onChange={(e) => setSelectedAuthor(e.target.value)} className="bg-white/10 text-slate-950 px-4 py-2 text-sm rounded-lg w-full border border-white/20 appearance-none cursor-pointer">
-
-            <option value="">All Authors</option>
-            {uniqueAuthors.map((author) =>
-            <option key={author} value={author}>{author}</option>
-            )}
-          </select>
-        </div>
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Start Date Filter */}
         <div>
           <label className="text-slate-950 mb-2 text-xs font-semibold block">From Date</label>
@@ -123,7 +103,7 @@ export default function StorySearchFilters({ stories, onFiltersChange }) {
       </div>
 
       {/* Reset Button */}
-      {(keyword || selectedAuthor || startDate || endDate) &&
+      {(keyword || startDate || endDate) &&
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

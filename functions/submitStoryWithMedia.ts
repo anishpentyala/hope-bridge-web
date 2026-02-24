@@ -21,7 +21,6 @@ Deno.serve(async (req) => {
     const content = String(formData.get('content') || '').trim();
     const topic = String(formData.get('topic') || '').trim();
     const mediaFiles = formData.getAll('media');
-    const audioFile = formData.get('audio');
 
     if (!title || !author_name || !content || !topic) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
@@ -43,11 +42,6 @@ Deno.serve(async (req) => {
       }
     }
 
-    let audio_url: string | null = null;
-    if (audioFile instanceof File) {
-      audio_url = await toDataUrl(audioFile);
-    }
-
     const story = createStory({
       title,
       author_name,
@@ -55,7 +49,7 @@ Deno.serve(async (req) => {
       topic,
       status: 'approved',
       media_urls,
-      audio_url,
+      audio_url: null,
       summary: summarize(content),
       tags: inferTags(content, topic),
       comments_count: 0,

@@ -130,14 +130,12 @@ const createSupabaseStory = async (story) => {
   return created ? mapSupabaseStory(created) : null;
 };
 
-export const createLocalStory = async ({ title, author_name, content, topic, mediaFiles = [], audioFile = null }) => {
+export const createLocalStory = async ({ title, author_name, content, topic, mediaFiles = [] }) => {
   const media_urls = [];
   for (const file of mediaFiles) {
     const dataUrl = await fileToDataUrl(file);
     if (dataUrl) media_urls.push(dataUrl);
   }
-
-  const audio_url = audioFile ? await fileToDataUrl(audioFile) : null;
 
   const baseStory = {
     title,
@@ -145,7 +143,7 @@ export const createLocalStory = async ({ title, author_name, content, topic, med
     content,
     topic,
     media_urls,
-    audio_url,
+    audio_url: null,
     summary: summarize(content),
     tags: inferTags(content, topic),
     status: 'approved',
