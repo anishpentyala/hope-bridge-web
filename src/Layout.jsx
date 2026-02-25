@@ -122,10 +122,24 @@ export default function Layout({ children, currentPageName }) {
   const location = useLocation();
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const nextIsScrolled = window.scrollY > 20;
+        setIsScrolled((prevIsScrolled) => (
+          prevIsScrolled === nextIsScrolled ? prevIsScrolled : nextIsScrolled
+        ));
+        ticking = false;
+      });
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -178,10 +192,10 @@ export default function Layout({ children, currentPageName }) {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
-            : 'bg-white/80 backdrop-blur-sm'
+            ? 'bg-white/95 md:backdrop-blur-md shadow-sm border-b border-gray-100'
+            : 'bg-white/90 md:bg-white/80 md:backdrop-blur-sm'
         }`}
         style={{ top: 'var(--crisis-banner-offset, 0px)' }}
       >
@@ -211,7 +225,7 @@ export default function Layout({ children, currentPageName }) {
                   <Link
                     key={link.page}
                     to={createPageUrl(link.page)}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                       isActive
                         ? 'bg-blue-50 text-blue-700 font-semibold'
                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -228,14 +242,14 @@ export default function Layout({ children, currentPageName }) {
               <Link to={createPageUrl('GetSupport')}>
                 <Button
                   variant="outline"
-                  className="rounded-lg text-sm font-medium border-blue-200 text-blue-700 hover:bg-blue-50 transition-all duration-200"
+                  className="rounded-lg text-sm font-medium border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors duration-200"
                 >
                   Get Support
                 </Button>
               </Link>
               <Link to={createPageUrl('Donate')}>
                 <Button
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 shadow-sm hover:shadow-md transition-all duration-200"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 shadow-sm hover:shadow-md transition-shadow duration-200"
                 >
                   <Heart className="w-4 h-4 mr-1.5" />
                   Donate
@@ -272,7 +286,7 @@ export default function Layout({ children, currentPageName }) {
                       key={link.page}
                       to={createPageUrl(link.page)}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+                      className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
                         isActive
                           ? 'bg-blue-50 text-blue-700 font-semibold'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'

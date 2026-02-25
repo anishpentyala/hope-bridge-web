@@ -12,9 +12,9 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black via-slate-950 to-black">
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 opacity-40">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-1/4 left-1/2 w-[450px] h-[450px] bg-purple-600 rounded-full mix-blend-screen filter blur-[110px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[500px] md:h-[500px] bg-cyan-500 rounded-full blur-[40px] sm:blur-[56px] md:mix-blend-screen md:filter md:blur-[120px] md:animate-pulse"></div>
+        <div className="hidden sm:block absolute top-1/3 right-1/4 w-[220px] h-[220px] md:w-[400px] md:h-[400px] bg-blue-600 rounded-full blur-[36px] md:mix-blend-screen md:filter md:blur-[100px] md:animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="hidden md:block absolute bottom-1/4 left-1/2 w-[450px] h-[450px] bg-purple-600 rounded-full mix-blend-screen filter blur-[110px] animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Grid overlay */}
@@ -50,12 +50,12 @@ export default function Hero() {
           </p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-            <Button onClick={() => scrollToSection('contact')} size="lg" className="group bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-black font-bold rounded-full px-10 py-7 text-lg shadow-[0_0_40px_rgba(0,217,255,0.5)] hover:shadow-[0_0_60px_rgba(0,217,255,0.8)] transition-all duration-300 hover:scale-105 border border-cyan-400/50">
+            <Button onClick={() => scrollToSection('contact')} size="lg" className="group bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-black font-bold rounded-full px-10 py-7 text-lg shadow-[0_0_40px_rgba(0,217,255,0.5)] hover:shadow-[0_0_60px_rgba(0,217,255,0.8)] transition-transform duration-300 hover:scale-105 border border-cyan-400/50">
               Get Support
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
 
-            <Button onClick={() => scrollToSection('mission')} size="lg" variant="outline" className="border-2 border-cyan-500/30 hover:border-cyan-400 bg-transparent text-white hover:bg-cyan-500/10 rounded-full px-10 py-7 text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm">
+            <Button onClick={() => scrollToSection('mission')} size="lg" variant="outline" className="border-2 border-cyan-500/30 hover:border-cyan-400 bg-transparent text-white hover:bg-cyan-500/10 rounded-full px-10 py-7 text-lg transition-transform duration-300 hover:scale-105 md:backdrop-blur-sm">
               Learn More
             </Button>
           </motion.div>
