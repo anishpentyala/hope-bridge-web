@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Heart, CheckCircle2 } from 'lucide-react';
+import { Loader2, CheckCircle2 } from 'lucide-react';
 import { base44 } from '@/api/client';
 
 export default function StripePaymentForm() {
-  const [selectedAmount, setSelectedAmount] = useState(100);
+  const [selectedAmount, setSelectedAmount] = useState(25);
   const [customAmount, setCustomAmount] = useState('');
   const [isCreatingIntent, setIsCreatingIntent] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -21,7 +21,7 @@ export default function StripePaymentForm() {
     }
   }, []);
 
-  const presetAmounts = [25, 50, 100, 250, 500];
+  const presetAmounts = [5, 10, 25, 50, 100];
 
   const handleAmountSelect = (amount) => {
     setSelectedAmount(amount);
@@ -76,7 +76,7 @@ export default function StripePaymentForm() {
         <Button
           onClick={() => {
             setPaymentSuccess(false);
-            setSelectedAmount(100);
+            setSelectedAmount(25);
           }}
           variant="outline"
         >
