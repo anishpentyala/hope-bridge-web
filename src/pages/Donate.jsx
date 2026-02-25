@@ -8,22 +8,22 @@ import BackgroundElements from '@/components/BackgroundElements';
 const impacts = [
   {
     icon: Heart,
-    amount: "$25",
+    amount: "$5",
     description: "Provides mental health resources and materials for one student"
   },
   {
     icon: Users,
-    amount: "$100",
+    amount: "$10",
     description: "Supports a peer support group session for 10-15 teens"
   },
   {
     icon: GraduationCap,
-    amount: "$250",
+    amount: "$25",
     description: "Funds a cultural awareness workshop at a local school"
   },
   {
     icon: Building,
-    amount: "$500",
+    amount: "$50",
     description: "Sponsors a month of community programming and outreach"
   }
 ];
