@@ -10,65 +10,9 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-gray-50">
-      {/* Animated corner circles */}
-      <motion.div
-        animate={{ 
-          x: [0, 30, 0],
-          y: [0, 40, 0],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute top-10 left-10 w-32 h-32 bg-blue-300/40 rounded-full blur-2xl"
-      />
-      
-      <motion.div
-        animate={{ 
-          x: [0, -25, 0],
-          y: [0, 35, 0],
-          scale: [1, 1.15, 1]
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-        className="absolute top-10 right-10 w-32 h-32 bg-gray-300/40 rounded-full blur-2xl"
-      />
-      
-      <motion.div
-        animate={{ 
-          x: [0, 35, 0],
-          y: [0, -30, 0],
-          scale: [1, 1.2, 1]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-        className="absolute bottom-10 left-10 w-32 h-32 bg-blue-400/40 rounded-full blur-2xl"
-      />
-      
-      <motion.div
-        animate={{ 
-          x: [0, -40, 0],
-          y: [0, -25, 0],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 3
-        }}
-        className="absolute bottom-10 right-10 w-32 h-32 bg-gray-400/40 rounded-full blur-2xl"
-      />
+      {/* Subtle decorative accents — CSS only for performance */}
+      <div className="absolute top-10 left-10 w-40 h-40 bg-blue-300/30 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute bottom-10 right-10 w-48 h-48 bg-blue-400/25 rounded-full blur-3xl" aria-hidden="true" />
 
       {/* Hero content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
@@ -88,8 +32,8 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="text-6xl sm:text-7xl lg:text-9xl font-black text-blue-500 leading-[1.05] mb-6 tracking-tight" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-            Hopebridge
+          <h1 className="text-6xl sm:text-7xl lg:text-9xl font-black text-blue-500 leading-[1.05] mb-6 tracking-tight">
+            HopeBridge
           </h1>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight mb-8">

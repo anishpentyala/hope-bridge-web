@@ -153,6 +153,7 @@ export default function Layout({ children, currentPageName }) {
     { label: 'About', page: 'About' },
     { label: 'Mission', page: 'Mission' },
     { label: 'Programs', page: 'Programs' },
+    { label: 'Story Project', page: 'StoryProject' },
     { label: 'Get Involved', page: 'GetInvolved' },
     { label: 'Contact', page: 'Contact' }
   ];
@@ -178,6 +179,10 @@ export default function Layout({ children, currentPageName }) {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
+        h1, h2, h3 {
+          font-family: 'Fredoka', 'Inter', sans-serif;
+        }
+
         ::selection {
           background-color: #3B82F6;
           color: #FFFFFF;
@@ -194,8 +199,8 @@ export default function Layout({ children, currentPageName }) {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
           isScrolled
-            ? 'bg-white/95 md:backdrop-blur-md shadow-sm border-b border-gray-100'
-            : 'bg-white/90 md:bg-white/80 md:backdrop-blur-sm'
+            ? 'bg-blue-50/95 md:backdrop-blur-md shadow-sm border-b border-blue-100'
+            : 'bg-blue-50/90 md:bg-blue-50/80 md:backdrop-blur-sm'
         }`}
         style={{ top: 'var(--crisis-banner-offset, 0px)' }}
       >
@@ -276,7 +281,7 @@ export default function Layout({ children, currentPageName }) {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
-              className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+              className="lg:hidden bg-blue-50 border-t border-blue-100 overflow-hidden"
             >
               <div className="max-w-7xl mx-auto px-6 py-4 space-y-1">
                 {navLinks.map((link) => {
