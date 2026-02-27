@@ -137,6 +137,50 @@ export default function About() {
           </motion.div>
         </div>
       </section>
+
+      {/* Meet the Team */}
+      <section className="py-16 px-6 lg:px-8 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12">
+
+            <h2 className="text-3xl sm:text-4xl font-black text-blue-700 mb-4">
+              Meet the Team
+            </h2>
+            <p className="text-lg text-gray-800 max-w-3xl mx-auto font-semibold">
+              Get to know the student leaders and mentors who help make Hope Bridge a welcoming space for every teen.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+            { name: 'Rishi Ravikumar', role: 'Planning Department Lead' },
+            { name: 'Anish Pentyala', role: 'Web Development Lead' },
+            { name: 'Arjun Kuchi', role: 'Field Work Lead' },
+            { name: 'Samvid Prabhu', role: 'Research Department Lead' },
+            { name: 'Arnav Malhotra', role: 'Socials Department Lead' },
+            { name: 'Ishaan Kejriwal', role: 'Event Organization Lead' }].map((member, index) =>
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-md text-center">
+
+                <div className="w-12 h-12 rounded-full bg-blue-600 mx-auto mb-4 flex items-center justify-center">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
+                <p className="text-blue-700 font-semibold mt-1">{member.role}</p>
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </section>
     </div>);
 
 }
