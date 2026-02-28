@@ -61,7 +61,7 @@ export default function PhysicalStory() {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-6 pt-32">
+      <div className="min-h-screen bg-black flex items-center justify-center px-6 pt-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -96,7 +96,7 @@ export default function PhysicalStory() {
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-black">
+      <section className="relative pt-16 pb-20 px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-black">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden opacity-40">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>

@@ -214,7 +214,7 @@ export default function StoryProject() {
       />
       <BackgroundElements />
       {/* Hero Section - ENHANCED */}
-      <section className="relative pt-32 pb-28 px-6 lg:px-8">
+      <section className="relative pt-16 pb-28 px-6 lg:px-8">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

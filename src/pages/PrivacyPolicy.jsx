@@ -5,7 +5,7 @@ import { Shield, Mail } from 'lucide-react';
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <section className="pt-32 pb-20 px-6 lg:px-8">
+      <section className="pt-16 pb-20 px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

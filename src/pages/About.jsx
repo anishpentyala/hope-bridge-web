@@ -37,7 +37,7 @@ export default function About() {
       <PageBg />
 
       {/* ── HERO ── */}
-      <section className="pt-32 pb-20 px-6 lg:px-8 relative z-10">
+      <section className="pt-16 pb-20 px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}

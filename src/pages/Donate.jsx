@@ -50,7 +50,7 @@ export default function DonatePage() {
       </div>
 
       {/* ── HERO ── */}
-      <section className="pt-32 pb-20 px-6 lg:px-8 relative z-10">
+      <section className="pt-16 pb-20 px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: 'easeOut' }}>
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-sm font-semibold mb-6">

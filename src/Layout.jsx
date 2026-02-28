@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from './utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, X, Phone, Mail, ExternalLink } from 'lucide-react';
+import { Heart, Menu, X, Phone, Mail, Instagram, Twitter, Linkedin, Youtube } from 'lucide-react';
 
 // ── Crisis Banner ──────────────────────────────────────────────────
 function CrisisBanner() {
@@ -14,7 +14,10 @@ function CrisisBanner() {
     <div className="bg-blue-900 text-white text-sm py-2 px-4 flex items-center justify-center gap-3 relative z-[60]">
       <Phone className="w-3.5 h-3.5 flex-shrink-0" />
       <span className="font-medium">
-        Need help now? Call or text <a href="tel:988" className="underline font-bold hover:text-blue-200 transition-colors">988</a> (Suicide & Crisis Lifeline) or text <a href="sms:741741" className="underline font-bold hover:text-blue-200 transition-colors">HOME to 741741</a>
+        Need help now? Call or text{' '}
+        <a href="tel:988" className="underline font-bold hover:text-blue-200 transition-colors">988</a>
+        {' '}(Suicide & Crisis Lifeline) or text{' '}
+        <a href="sms:741741" className="underline font-bold hover:text-blue-200 transition-colors">HOME to 741741</a>
       </span>
       <button
         onClick={() => setDismissed(true)}
@@ -38,7 +41,10 @@ function Footer() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 text-white text-sm">
           <Heart className="w-4 h-4 text-red-300 flex-shrink-0" />
           <span className="font-medium text-center">
-            If you or someone you know is in crisis, call <a href="tel:988" className="underline font-bold">988</a> or text <a href="sms:741741" className="underline font-bold">HOME to 741741</a>
+            If you or someone you know is in crisis, call{' '}
+            <a href="tel:988" className="underline font-bold">988</a>
+            {' '}or text{' '}
+            <a href="sms:741741" className="underline font-bold">HOME to 741741</a>
           </span>
         </div>
       </div>
@@ -55,9 +61,51 @@ function Footer() {
               />
               <span className="text-lg font-bold text-white">HopeBridge</span>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Youth-led nonprofit creating culturally informed mental health support for Asian American teens.
+            <p className="text-sm text-gray-400 leading-relaxed mb-5">
+              Youth-led nonprofit creating culturally informed mental health support for Asian American teens in Sammamish, WA.
             </p>
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              <a
+                href="https://instagram.com/hopebridgeservices"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-8 h-8 rounded-lg bg-gray-800 hover:bg-pink-600 flex items-center justify-center transition-colors duration-200"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://twitter.com/hopebridgeserv"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter / X"
+                className="w-8 h-8 rounded-lg bg-gray-800 hover:bg-sky-500 flex items-center justify-center transition-colors duration-200"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href="https://linkedin.com/company/hopebridge-services"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-8 h-8 rounded-lg bg-gray-800 hover:bg-blue-600 flex items-center justify-center transition-colors duration-200"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="https://tiktok.com/@hopebridgeservices"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-600 flex items-center justify-center transition-colors duration-200"
+              >
+                {/* TikTok SVG (not in lucide) */}
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Programs */}
@@ -87,17 +135,31 @@ function Footer() {
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Connect</h4>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3.5 h-3.5 flex-shrink-0" />
                 <a href="mailto:hopebridgecommunityservices@gmail.com" className="hover:text-white transition-colors break-all">
                   hopebridgecommunityservices@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5" />
+                <Phone className="w-3.5 h-3.5 flex-shrink-0" />
                 <a href="tel:425-610-7760" className="hover:text-white transition-colors">425-610-7760</a>
               </li>
             </ul>
             <p className="text-xs text-gray-500 mt-4">Sammamish, WA &middot; Serving King County</p>
+
+            {/* Trust badges */}
+            <div className="mt-5 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700 text-xs text-gray-400">
+                <span className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
+                501(c)(3) Pending
+              </div>
+              <div className="block">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700 text-xs text-gray-400">
+                  <Heart className="w-3 h-3 text-red-400 flex-shrink-0" />
+                  Youth-Founded &amp; Led
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -126,20 +188,16 @@ export default function Layout({ children, currentPageName }) {
 
     const handleScroll = () => {
       if (ticking) return;
-
       ticking = true;
       window.requestAnimationFrame(() => {
         const nextIsScrolled = window.scrollY > 20;
-        setIsScrolled((prevIsScrolled) => (
-          prevIsScrolled === nextIsScrolled ? prevIsScrolled : nextIsScrolled
-        ));
+        setIsScrolled((prev) => (prev === nextIsScrolled ? prev : nextIsScrolled));
         ticking = false;
       });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -155,7 +213,7 @@ export default function Layout({ children, currentPageName }) {
     { label: 'Programs', page: 'Programs' },
     { label: 'Story Project', page: 'StoryProject' },
     { label: 'Get Involved', page: 'GetInvolved' },
-    { label: 'Contact', page: 'Contact' }
+    { label: 'Contact', page: 'Contact' },
   ];
 
   return (
@@ -169,9 +227,7 @@ export default function Layout({ children, currentPageName }) {
           --color-text-light: #64748B;
         }
 
-        html {
-          scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
           background-color: var(--color-surface);
@@ -191,21 +247,21 @@ export default function Layout({ children, currentPageName }) {
           animation: shimmer 3s ease-in-out infinite;
         }
         @keyframes shimmer {
-          0% { background-position: 0% center; }
-          50% { background-position: 200% center; }
+          0%   { background-position: 0% center; }
+          50%  { background-position: 200% center; }
           100% { background-position: 0% center; }
         }
 
         .glass-card {
-          background: rgba(255, 255, 255, 0.65);
+          background: rgba(255,255,255,0.65);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          border: 1px solid rgba(255,255,255,0.3);
         }
 
         .glow-hover { transition: box-shadow 0.3s ease; }
         .glow-hover:hover {
-          box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.15);
+          box-shadow: 0 0 30px rgba(59,130,246,0.4), 0 0 60px rgba(59,130,246,0.15);
         }
 
         .gradient-border {
@@ -224,12 +280,12 @@ export default function Layout({ children, currentPageName }) {
           z-index: -1;
         }
         @keyframes grad-rot {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
 
-        .counter-glow { text-shadow: 0 0 40px rgba(59, 130, 246, 0.3); }
+        .counter-glow { text-shadow: 0 0 40px rgba(59,130,246,0.3); }
 
         ::selection {
           background-color: #3B82F6;
@@ -237,139 +293,131 @@ export default function Layout({ children, currentPageName }) {
         }
       `}</style>
 
-      {/* Crisis Banner — always visible at top */}
-      <CrisisBanner />
+      {/* ── Sticky top bar: crisis banner + navbar as one unit ── */}
+      <div className="sticky top-0 z-50 flex flex-col">
+        <CrisisBanner />
 
-      {/* Navigation */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          isScrolled
-            ? 'bg-blue-50/95 md:backdrop-blur-md shadow-sm border-b border-blue-100'
-            : 'bg-blue-50/90 md:bg-blue-50/80 md:backdrop-blur-sm'
-        }`}
-        style={{ top: 'var(--crisis-banner-offset, 0px)' }}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-18">
-            {/* Logo */}
-            <Link
-              to={createPageUrl('Home')}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2.5 group"
-            >
-              <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696d852fbbda0ee653ff4e65/2ef794ee6_ChatGPTImageJan16202611_46_44PM.png"
-                alt="HopeBridge"
-                className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="text-xl font-bold text-gray-900 tracking-tight">
-                Hope<span className="text-blue-600">Bridge</span>
-              </span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => {
-                const isActive = currentPageName === link.page;
-                return (
-                  <Link
-                    key={link.page}
-                    to={createPageUrl(link.page)}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
-                      isActive
-                        ? 'bg-blue-50 text-blue-700 font-semibold'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Link to={createPageUrl('GetSupport')}>
-                <Button
-                  variant="outline"
-                  className="rounded-lg text-sm font-medium border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors duration-200"
-                >
-                  Get Support
-                </Button>
+        <header
+          className={`transition-colors duration-300 ${
+            isScrolled
+              ? 'bg-blue-50/95 backdrop-blur-md shadow-sm border-b border-blue-100'
+              : 'bg-blue-50/90'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              {/* Logo */}
+              <Link
+                to={createPageUrl('Home')}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="flex items-center gap-2.5 group"
+              >
+                <img
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/696d852fbbda0ee653ff4e65/2ef794ee6_ChatGPTImageJan16202611_46_44PM.png"
+                  alt="HopeBridge"
+                  className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="text-xl font-bold text-gray-900 tracking-tight">
+                  Hope<span className="text-blue-600">Bridge</span>
+                </span>
               </Link>
-              <Link to={createPageUrl('Donate')}>
-                <Button
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 shadow-sm hover:shadow-md transition-shadow duration-200"
-                >
-                  <Heart className="w-4 h-4 mr-1.5" />
-                  Donate
-                </Button>
-              </Link>
-            </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
-              aria-label="Toggle navigation menu"
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25 }}
-              className="lg:hidden bg-blue-50 border-t border-blue-100 overflow-hidden"
-            >
-              <div className="max-w-7xl mx-auto px-6 py-4 space-y-1">
+              {/* Desktop Navigation */}
+              <nav className="hidden lg:flex items-center gap-1">
                 {navLinks.map((link) => {
                   const isActive = currentPageName === link.page;
                   return (
                     <Link
                       key={link.page}
                       to={createPageUrl(link.page)}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+                      className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                         isActive
                           ? 'bg-blue-50 text-blue-700 font-semibold'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                       }`}
                     >
                       {link.label}
                     </Link>
                   );
                 })}
-                <div className="pt-3 space-y-2">
-                  <Link to={createPageUrl('GetSupport')} className="block" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button
-                      variant="outline"
-                      className="w-full rounded-lg font-medium border-blue-200 text-blue-700 hover:bg-blue-50"
-                    >
-                      Get Support
-                    </Button>
-                  </Link>
-                  <Link to={createPageUrl('Donate')} className="block" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm">
-                      <Heart className="w-4 h-4 mr-1.5" />
-                      Donate
-                    </Button>
-                  </Link>
-                </div>
+              </nav>
+
+              {/* Desktop CTAs */}
+              <div className="hidden lg:flex items-center gap-3">
+                <Link to={createPageUrl('GetSupport')}>
+                  <Button
+                    variant="outline"
+                    className="rounded-lg text-sm font-medium border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors duration-200"
+                  >
+                    Get Support
+                  </Button>
+                </Link>
+                <Link to={createPageUrl('Donate')}>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 shadow-sm hover:shadow-md transition-all duration-200">
+                    <Heart className="w-4 h-4 mr-1.5" />
+                    Donate
+                  </Button>
+                </Link>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label="Toggle navigation menu"
+              >
+                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.25 }}
+                className="lg:hidden bg-blue-50 border-t border-blue-100 overflow-hidden"
+              >
+                <div className="max-w-7xl mx-auto px-6 py-4 space-y-1">
+                  {navLinks.map((link) => {
+                    const isActive = currentPageName === link.page;
+                    return (
+                      <Link
+                        key={link.page}
+                        to={createPageUrl(link.page)}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+                          isActive
+                            ? 'bg-blue-100 text-blue-700 font-semibold'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                  <div className="pt-3 space-y-2">
+                    <Link to={createPageUrl('GetSupport')} className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                      <Button variant="outline" className="w-full rounded-lg font-medium border-blue-200 text-blue-700 hover:bg-blue-50">
+                        Get Support
+                      </Button>
+                    </Link>
+                    <Link to={createPageUrl('Donate')} className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm">
+                        <Heart className="w-4 h-4 mr-1.5" />
+                        Donate
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </header>
+      </div>
 
       {/* Main Content */}
       <main className="flex-1">

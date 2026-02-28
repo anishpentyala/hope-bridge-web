@@ -17,6 +17,7 @@ export default function Home() {
       <Mission />
       <Problem />
       <StorySection />
+      <Impact />
       <section id="vision" className="py-24 lg:py-32 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop" alt="" className="w-full h-full object-cover" />
