@@ -8,8 +8,8 @@ import { createPageUrl } from '../utils';
 const programs = [
   {
     icon: Users,
-    title: 'Peer Support Circles',
-    description: 'Weekly facilitated groups where teens share experiences in a safe, judgment-free space. Led by trained peer mentors who understand the cultural context.',
+    title: 'Support Sessions',
+    description: 'Safe, facilitated sessions where Asian teens share experiences and find support from others who understand the cultural context.',
     gradient: 'from-blue-600 to-blue-500',
     bg: 'bg-blue-50',
     border: 'border-blue-200',

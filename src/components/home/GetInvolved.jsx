@@ -7,7 +7,7 @@ const pathways = [
   {
     icon: GraduationCap,
     title: "Students",
-    description: "Join a peer support circle, attend a workshop, or simply reach out when you need someone who understands.",
+    description: "Explore our programs, attend a workshop, or simply reach out when you need someone who understands.",
     cta: "Find Support",
     color: "bg-gradient-to-br from-blue-600 to-blue-500"
   },

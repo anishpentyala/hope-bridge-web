@@ -86,7 +86,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="text-shimmer text-6xl sm:text-7xl lg:text-8xl font-black leading-[0.95] mb-5 tracking-tight">
+          <h1 className="text-shimmer text-7xl sm:text-8xl lg:text-9xl font-black leading-none pb-3 mb-2 tracking-tight">
             HopeBridge
           </h1>
         </motion.div>
@@ -98,7 +98,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
           className="mb-8"
         >
-          <h2 className="inline-block text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight hero-underline">
+          <h2 className="inline-block text-2xl sm:text-3xl lg:text-[2.25rem] font-black text-gray-900 leading-tight hero-underline">
             Building Bridges to&nbsp;
             <span className="text-blue-600">Brighter Futures</span>
           </h2>

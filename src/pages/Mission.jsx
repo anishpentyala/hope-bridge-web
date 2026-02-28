@@ -308,9 +308,9 @@ export default function Mission() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="group">
-                <div className="glass-card rounded-2xl p-8 h-full hover:bg-white/15 transition-all duration-300 glow-hover">
+                <div className="rounded-2xl p-8 h-full bg-white/15 border border-blue-400/40 transition-all duration-300 hover:bg-white/20 hover:border-blue-300/60">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/30 border border-blue-400/30 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors">
                       <item.icon className="w-6 h-6 text-blue-300" />
                     </div>
                     <div className="text-right">

@@ -143,15 +143,15 @@ const audienceTabs = ['I'm a Teen', 'I'm a Parent', 'I'm an Educator'];
 const audienceContent = {
   "I'm a Teen": {
     heading: "You deserve support — and you're brave for looking.",
-    body: "It can feel really hard to ask for help, especially when you're worried about what your family might think. But reaching out is a sign of strength, not weakness. HopeBridge's peer support groups are a safe, judgment-free space to talk with other teens who truly get it.",
+    body: "It can feel really hard to ask for help, especially when you're worried about what your family might think. But reaching out is a sign of strength, not weakness. HopeBridge is building a community where Asian teens can connect, share, and find support from people who truly get it.",
     resources: [
-      "Our peer support circles meet weekly — all anonymous, all free",
+      "One-on-one peer mentoring — anonymous and free",
       "Connect with a peer mentor who shares your cultural background",
       "Access our story library to know you're not alone",
       "Use any crisis line above anytime — no one needs to know",
     ],
-    cta: 'Join a Peer Circle',
-    ctaLink: 'Contact',
+    cta: 'Explore Our Programs',
+    ctaLink: 'Programs',
     color: 'blue',
   },
   "I'm a Parent": {
@@ -173,7 +173,7 @@ const audienceContent = {
     resources: [
       "Bring HopeBridge programming to your school",
       "Access educator guides on Asian teen mental health",
-      "Refer students to our peer support groups",
+      "Refer students to our support programs",
       "Partner with us for a school mental health day",
     ],
     cta: 'Explore School Partnerships',
@@ -434,7 +434,7 @@ export default function GetSupport() {
               Connect with HopeBridge
             </h2>
             <p className="text-white/80 text-lg leading-relaxed mb-10">
-              Our peer support groups are run by Asian teens, for Asian teens.
+              HopeBridge is built by Asian teens, for Asian teens.
               Join us for a free, anonymous session — no commitment required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

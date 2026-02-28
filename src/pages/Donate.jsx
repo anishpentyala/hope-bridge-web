@@ -7,7 +7,7 @@ import StripePaymentForm from '@/components/donate/StripePaymentForm';
 
 const impacts = [
   { icon: Heart,         amount: '$5',  description: 'Provides mental health resources and materials for one student',            gradient: 'from-rose-500 to-pink-500',   bg: 'bg-rose-50',   border: 'border-rose-200' },
-  { icon: Users,         amount: '$10', description: 'Supports a peer support group session for 10–15 teens',                     gradient: 'from-blue-500 to-indigo-500', bg: 'bg-blue-50',   border: 'border-blue-200' },
+  { icon: Users,         amount: '$10', description: 'Supports a community support session for 10–15 teens',                     gradient: 'from-blue-500 to-indigo-500', bg: 'bg-blue-50',   border: 'border-blue-200' },
   { icon: GraduationCap, amount: '$25', description: 'Funds a cultural awareness workshop at a local school',                     gradient: 'from-indigo-500 to-purple-500', bg: 'bg-indigo-50', border: 'border-indigo-200' },
   { icon: Building,      amount: '$50', description: 'Sponsors a full month of community programming and outreach',               gradient: 'from-sky-500 to-blue-500',   bg: 'bg-sky-50',    border: 'border-sky-200' },
 ];
@@ -31,7 +31,7 @@ const whyPoints = [
 ];
 
 const allocation = [
-  { label: 'Direct Programs & Services',  pct: 65, desc: 'Peer support groups, workshops, and mental health resources' },
+  { label: 'Direct Programs & Services',  pct: 65, desc: 'Community programs, workshops, and mental health resources' },
   { label: 'School Partnerships',          pct: 20, desc: 'Training educators and bringing programs to schools' },
   { label: 'Operations & Growth',          pct: 15, desc: 'Administrative costs and expanding our reach' },
 ];

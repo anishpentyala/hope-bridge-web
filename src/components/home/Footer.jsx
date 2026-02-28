@@ -90,7 +90,7 @@ export default function Footer() {
             <ul className="space-y-3 text-slate-400 text-sm">
               <li>
                 <button onClick={() => scrollToSection('programs')} className="hover:text-blue-400 transition-colors">
-                  Peer Support Circles
+                  Support Sessions
                 </button>
               </li>
               <li>
