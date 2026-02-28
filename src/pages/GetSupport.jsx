@@ -84,10 +84,10 @@ const asianSpecificResources = [
     color: 'from-indigo-500 to-violet-500',
   },
   {
-    name: 'Asian Pacific Islander Family Support Network',
-    url: 'https://apifamilysupport.org',
-    description: 'Support and resources for API families navigating mental health challenges together.',
-    tags: ['Family-focused', 'API', 'Support'],
+    name: 'Asian & Pacific Islander American Health Forum',
+    url: 'https://www.apiahf.org',
+    description: 'Leading national health advocacy organization addressing health needs of AAPI communities, including mental health.',
+    tags: ['National', 'Health Advocacy', 'AAPI'],
     icon: Heart,
     color: 'from-emerald-500 to-teal-500',
   },
@@ -95,9 +95,9 @@ const asianSpecificResources = [
 
 const onlineResources = [
   {
-    name: 'Mind Matters (7 Cups)',
-    url: 'https://7cups.com',
-    description: 'Free online chat with trained listeners. Great for teens who prefer text.',
+    name: '7 Cups',
+    url: 'https://www.7cups.com',
+    description: 'Free online chat with trained volunteer listeners 24/7. Great for teens who prefer text over calling.',
     format: 'Online Chat',
     icon: MessageCircle,
   },
@@ -118,15 +118,15 @@ const onlineResources = [
   {
     name: 'ReachOut Youth Mental Health',
     url: 'https://au.reachout.com',
-    description: 'Guides, stories, and tools for teens managing their mental health.',
+    description: 'Evidence-based guides, stories, and tools for teens managing mental health, stress, and identity challenges.',
     format: 'Online Guide',
     icon: BookOpen,
   },
   {
-    name: 'OK2Talk',
-    url: 'https://ok2talk.org',
-    description: 'Community for teens to share stories and find hope. By NAMI.',
-    format: 'Community',
+    name: 'NAMI Teen & Young Adult Resources',
+    url: 'https://www.nami.org/Your-Journey/Kids-Teens-and-Young-Adults/Teens',
+    description: 'National Alliance on Mental Illness resources specifically for teens — guides, stories, and how to find help.',
+    format: 'Resource Hub',
     icon: Users,
   },
   {
