@@ -98,8 +98,6 @@ const initialForm = {
 export default function Partnerships() {
   const [formData, setFormData] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const validate = () => {
     const e = {};
@@ -118,39 +116,15 @@ export default function Partnerships() {
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = (e) => {
     const errs = validate();
     if (Object.keys(errs).length > 0) {
+      e.preventDefault();
       setErrors(errs);
       return;
     }
-    setIsSubmitting(true);
-    try {
-      const payload = new FormData();
-      payload.append('_subject', `Partnership Inquiry — ${formData.orgName}`);
-      Object.entries(formData).forEach(([key, value]) => payload.append(key, value ?? ''));
 
-      const res = await fetch('https://formspree.io/f/mojnzdry', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: payload
-      });
-
-      if (res.ok) {
-        setIsSuccess(true);
-        setFormData(initialForm);
-        setErrors({});
-      } else {
-        const errorBody = await res.json().catch(() => null);
-        const details = errorBody?.errors?.map((error) => error.message).join(', ') || 'Unable to submit form.';
-        throw new Error(details);
-      }
-    } catch (error) {
-      setErrors({ submit: error?.message || 'Something went wrong. Please try again or email us directly.' });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setErrors({});
   };
 
   const inputClass = (field) =>
@@ -362,27 +336,14 @@ export default function Partnerships() {
               </p>
             </div>
 
-            {isSuccess ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-16 px-8 bg-blue-50 rounded-2xl border border-blue-100"
-              >
-                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
-                  <CheckCircle className="w-8 h-8 text-green-600" />
-                </div>
-                <h3 className="text-2xl font-black text-gray-900 mb-3">Inquiry Received!</h3>
-                <p className="text-gray-600 leading-relaxed max-w-sm mx-auto">
-                  Thank you for reaching out. We will review your inquiry and be in touch within
-                  2 business days to schedule a discovery call.
-                </p>
-              </motion.div>
-            ) : (
-              <form
+            <form
+                action="https://formspree.io/f/mojnzdry"
+                method="POST"
                 onSubmit={handleSubmit}
                 noValidate
                 className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 space-y-6"
               >
+                <input type="hidden" name="_subject" value={`Partnership Inquiry — ${formData.orgName || 'HopeBridge'}`} />
                 {/* Contact Info */}
                 <div>
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Your Information</h3>
@@ -568,27 +529,16 @@ export default function Partnerships() {
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-70"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Submit Partnership Inquiry
-                    </>
-                  )}
+                  <Send className="w-4 h-4" />
+                  Submit Partnership Inquiry
                 </Button>
 
                 <p className="text-xs text-center text-slate-400">
                   We typically respond within 2 business days. All information is kept confidential.
                 </p>
               </form>
-            )}
           </motion.div>
         </div>
       </section>
