@@ -214,7 +214,6 @@ export default function Layout({ children, currentPageName }) {
         { label: 'Resources', page: 'Resources' },
       ]
     },
-    { label: 'Get Support', page: 'GetSupport' },
     {
       label: 'Get Involved', page: 'GetInvolved',
       dropdown: [
