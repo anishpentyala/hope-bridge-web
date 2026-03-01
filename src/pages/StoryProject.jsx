@@ -31,34 +31,23 @@ export default function StoryProject() {
   // Load stories
   useEffect(() => {
     const loadStories = async () => {
-      const localStories = listLocalStories();
-
-      const [supabaseStories, base44Stories] = await Promise.all([
-        listSupabaseStories(),
-        base44.entities.Story.filter({ status: 'approved' }, '-created_date').catch((error) => {
-          console.error('Failed to load Base44 stories:', error);
-          return [];
-        })
-      ]);
-
-      const remoteStories = [...supabaseStories, ...base44Stories];
-      const allStories = mergeStories(remoteStories, localStories);
-      setStories(allStories);
-      setFilteredStories(allStories);
-      setIsLoading(false);
+      try {
+        const supabaseStories = await listSupabaseStories();
+        setStories(supabaseStories);
+        setFilteredStories(supabaseStories);
+      } catch (error) {
+        console.error('Failed to load stories:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     loadStories();
   }, []);
 
   const reloadStories = async () => {
-    const localStories = listLocalStories();
-    const [supabaseStories, base44Stories] = await Promise.all([
-      listSupabaseStories(),
-      base44.entities.Story.filter({ status: 'approved' }, '-created_date').catch(() => [])
-    ]);
-    const allStories = mergeStories([...supabaseStories, ...base44Stories], localStories);
-    setStories(allStories);
-    setFilteredStories(allStories);
+    const supabaseStories = await listSupabaseStories();
+    setStories(supabaseStories);
+    setFilteredStories(supabaseStories);
   };
 
   // Handle file selection
@@ -169,11 +158,6 @@ export default function StoryProject() {
         // Persist like update
         updateLocalStoryLikes(storyId, newLikes);
         await updateSupabaseStoryLikes(storyId, newLikes);
-        try {
-          await base44.entities.Story.update(storyId, { likes: newLikes });
-        } catch (error) {
-          console.error('Failed to update backend like:', error);
-        }
       } else {
         // Like
         const newLikes = story.likes + 1;
@@ -186,11 +170,6 @@ export default function StoryProject() {
         // Persist like update
         updateLocalStoryLikes(storyId, newLikes);
         await updateSupabaseStoryLikes(storyId, newLikes);
-        try {
-          await base44.entities.Story.update(storyId, { likes: newLikes });
-        } catch (error) {
-          console.error('Failed to update backend like:', error);
-        }
       }
     } catch (error) {
       console.error('Failed to update like:', error);
