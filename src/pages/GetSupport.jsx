@@ -446,9 +446,9 @@ export default function GetSupport() {
                 </Button>
               </Link>
               <Link to={createPageUrl('Programs')}>
-                <Button variant="outline" className="border-2 border-white/40 !text-white hover:!text-white hover:bg-white/10 rounded-full px-8 py-6 text-base font-semibold transition-all duration-300">
+                <button className="border-2 border-white/60 text-white hover:bg-white/15 rounded-full px-8 py-6 text-base font-semibold transition-all duration-300">
                   See All Programs
-                </Button>
+                </button>
               </Link>
             </div>
           </motion.div>
