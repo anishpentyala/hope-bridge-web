@@ -19,8 +19,8 @@ function PageBg() {
 
 const teamMembers = [
   { name: 'Anish Pentyala',   role: 'Web Development Lead',      email: 'Anish.n.pentyala@gmail.com',      initials: 'AP', color: 'from-blue-500 to-blue-700' },
-  { name: 'Rishi Ravikumar',  role: 'Planning Department Lead',   email: 'rishirkumar@outlook.com',                              initials: 'RR', color: 'from-indigo-500 to-blue-600' },
-  { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500' },
+  { name: 'Rishi Ravikumar',  role: 'Planning Department Lead',   email: 'rishirkumar@outlook.com',                              initials: 'RR', color: 'from-indigo-500 to-blue-600', image: '/images/team/rishi.jpg' },
+  { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500', image: '/images/team/arjun.jpg' },
   { name: 'Samvid Prabhu',    role: 'Research Department Lead',   email: 'samvid.s.prabhu@gmail.com',                              initials: 'SP', color: 'from-sky-500 to-blue-600' },
   { name: 'Arnav Malhotra',   role: 'Socials Department Lead',    email: 'reacharnavmalhotra@gmail.com',    initials: 'AM', color: 'from-blue-500 to-indigo-600' },
   { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500', image: '/images/team/ishaan.jpg' },
