@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from './utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, X, Phone, Mail, Instagram, Twitter, Linkedin, Youtube } from 'lucide-react';
+import { Heart, Menu, X, Phone, Mail, Instagram, Twitter, Linkedin, ChevronDown } from 'lucide-react';
 
 // ── Crisis Banner ──────────────────────────────────────────────────
 function CrisisBanner() {
@@ -113,8 +113,8 @@ function Footer() {
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Programs</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to={createPageUrl('StoryProject')} className="hover:text-white transition-colors">Story Project</Link></li>
-              <li><Link to={createPageUrl('Resources')} className="hover:text-white transition-colors">Find Support</Link></li>
-              <li><Link to={createPageUrl('Schools')} className="hover:text-white transition-colors">School Partnerships</Link></li>
+              <li><Link to={createPageUrl('Resources')} className="hover:text-white transition-colors">Resources</Link></li>
+              <li><Link to={createPageUrl('Partnerships')} className="hover:text-white transition-colors">School Partnerships</Link></li>
               <li><Link to={createPageUrl('Programs')} className="hover:text-white transition-colors">All Programs</Link></li>
             </ul>
           </div>
@@ -181,6 +181,8 @@ function Footer() {
 export default function Layout({ children, currentPageName }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -210,9 +212,24 @@ export default function Layout({ children, currentPageName }) {
     { label: 'Home', page: 'Home' },
     { label: 'About', page: 'About' },
     { label: 'Mission', page: 'Mission' },
-    { label: 'Programs', page: 'Programs' },
-    { label: 'Story Project', page: 'StoryProject' },
-    { label: 'Get Involved', page: 'GetInvolved' },
+    {
+      label: 'Programs', page: 'Programs',
+      dropdown: [
+        { label: 'All Programs', page: 'Programs' },
+        { label: 'Resources', page: 'Resources' },
+        { label: 'Story Project', page: 'StoryProject' },
+      ]
+    },
+    { label: 'Get Support', page: 'GetSupport' },
+    {
+      label: 'Get Involved', page: 'GetInvolved',
+      dropdown: [
+        { label: 'Overview', page: 'GetInvolved' },
+        { label: 'Volunteer', page: 'Volunteer' },
+        { label: 'Partnerships', page: 'Partnerships' },
+        { label: 'Donate', page: 'Donate' },
+      ]
+    },
     { label: 'Contact', page: 'Contact' },
   ];
 
@@ -325,7 +342,48 @@ export default function Layout({ children, currentPageName }) {
               {/* Desktop Navigation */}
               <nav className="hidden lg:flex items-center gap-1">
                 {navLinks.map((link) => {
-                  const isActive = currentPageName === link.page;
+                  const isActive = currentPageName === link.page ||
+                    (link.dropdown && link.dropdown.some(d => d.page === currentPageName));
+                  if (link.dropdown) {
+                    return (
+                      <div
+                        key={link.page}
+                        className="relative"
+                        onMouseEnter={() => setOpenDropdown(link.page)}
+                        onMouseLeave={() => setOpenDropdown(null)}
+                      >
+                        <Link
+                          to={createPageUrl(link.page)}
+                          className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                            isActive
+                              ? 'bg-blue-50 text-blue-700 font-semibold'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                          }`}
+                        >
+                          {link.label}
+                          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === link.page ? 'rotate-180' : ''}`} />
+                        </Link>
+                        {openDropdown === link.page && (
+                          <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 z-50">
+                            {link.dropdown.map((item) => (
+                              <Link
+                                key={item.page}
+                                to={createPageUrl(item.page)}
+                                onClick={() => setOpenDropdown(null)}
+                                className={`flex items-center px-4 py-2.5 text-sm transition-colors ${
+                                  currentPageName === item.page
+                                    ? 'text-blue-700 font-semibold bg-blue-50'
+                                    : 'text-gray-600 hover:bg-blue-50 hover:text-blue-700'
+                                }`}
+                              >
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
                   return (
                     <Link
                       key={link.page}
@@ -342,16 +400,8 @@ export default function Layout({ children, currentPageName }) {
                 })}
               </nav>
 
-              {/* Desktop CTAs */}
+              {/* Desktop CTA */}
               <div className="hidden lg:flex items-center gap-3">
-                <Link to={createPageUrl('GetSupport')}>
-                  <Button
-                    variant="outline"
-                    className="rounded-lg text-sm font-medium border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors duration-200"
-                  >
-                    Get Support
-                  </Button>
-                </Link>
                 <Link to={createPageUrl('Donate')}>
                   <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 shadow-sm hover:shadow-md transition-all duration-200">
                     <Heart className="w-4 h-4 mr-1.5" />
@@ -383,7 +433,44 @@ export default function Layout({ children, currentPageName }) {
               >
                 <div className="max-w-7xl mx-auto px-6 py-4 space-y-1">
                   {navLinks.map((link) => {
-                    const isActive = currentPageName === link.page;
+                    const isActive = currentPageName === link.page ||
+                      (link.dropdown && link.dropdown.some(d => d.page === currentPageName));
+                    if (link.dropdown) {
+                      const isExpanded = openMobileDropdown === link.page;
+                      return (
+                        <div key={link.page}>
+                          <button
+                            onClick={() => setOpenMobileDropdown(isExpanded ? null : link.page)}
+                            className={`flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+                              isActive
+                                ? 'bg-blue-100 text-blue-700 font-semibold'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                            }`}
+                          >
+                            {link.label}
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                          </button>
+                          {isExpanded && (
+                            <div className="ml-4 mt-1 space-y-1 border-l-2 border-blue-100 pl-3">
+                              {link.dropdown.map((item) => (
+                                <Link
+                                  key={item.page}
+                                  to={createPageUrl(item.page)}
+                                  onClick={() => { setIsMobileMenuOpen(false); setOpenMobileDropdown(null); }}
+                                  className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                                    currentPageName === item.page
+                                      ? 'text-blue-700 bg-blue-50 font-semibold'
+                                      : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                  }`}
+                                >
+                                  {item.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
                     return (
                       <Link
                         key={link.page}
@@ -400,11 +487,6 @@ export default function Layout({ children, currentPageName }) {
                     );
                   })}
                   <div className="pt-3 space-y-2">
-                    <Link to={createPageUrl('GetSupport')} className="block" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button variant="outline" className="w-full rounded-lg font-medium border-blue-200 text-blue-700 hover:bg-blue-50">
-                        Get Support
-                      </Button>
-                    </Link>
                     <Link to={createPageUrl('Donate')} className="block" onClick={() => setIsMobileMenuOpen(false)}>
                       <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm">
                         <Heart className="w-4 h-4 mr-1.5" />
