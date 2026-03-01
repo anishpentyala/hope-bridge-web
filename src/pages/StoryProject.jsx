@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { Button } from '@/components/ui/button';
+import { base44 } from '@/api/client';
 import { Camera, Loader2, CheckCircle2, AlertCircle, Pen } from 'lucide-react';
 import StoryFilters from '@/components/story/StoryFilters';
 import StoryCard from '@/components/story/StoryCard';
@@ -10,7 +11,7 @@ import FeaturedStories from '@/components/story/FeaturedStories';
 import StoryInsights from '@/components/story/StoryInsights';
 import StorySearchFilters from '@/components/story/StorySearchFilters';
 import BackgroundElements from '@/components/BackgroundElements';
-import { createLocalStory, listSupabaseStories, updateLocalStoryLikes, updateSupabaseStoryLikes } from '@/lib/localStories';
+import { listLocalStories, listSupabaseStories, mergeStories, updateLocalStoryLikes, updateSupabaseStoryLikes } from '@/lib/localStories';
 import { moderateStoryText } from '@/lib/contentModeration';
 
 export default function StoryProject() {
@@ -89,13 +90,31 @@ export default function StoryProject() {
     }
 
     try {
-      await createLocalStory({
-        title: `Photo Story - ${new Date().toLocaleDateString()}`,
-        author_name: 'Anonymous',
-        content: 'Story shared via uploaded photo. Text extraction is not enabled in this mode yet.',
-        topic: photoTopic,
-        mediaFiles: [selectedFile]
-      });
+      const multipartFormData = new FormData();
+      multipartFormData.append('title', `Photo Story - ${new Date().toLocaleDateString()}`);
+      multipartFormData.append('author_name', 'Anonymous');
+      multipartFormData.append('content', 'Story shared via uploaded photo. Text extraction is not enabled in this mode yet.');
+      multipartFormData.append('topic', photoTopic);
+      multipartFormData.append('photo', selectedFile);
+
+      try {
+        await base44.request('/functions/submitPhotoStory', {
+          method: 'POST',
+          body: multipartFormData
+        });
+      } catch (error) {
+        const status = error?.status || error?.data?.status;
+        const notConfigured =
+        status === 404 ||
+        /not found|endpoint|function/i.test(error?.message || '') ||
+        /not found|endpoint|function/i.test(error?.data?.error || '');
+
+        if (notConfigured) {
+          throw new Error('Photo story upload is temporarily unavailable until Supabase endpoint is configured.');
+        }
+
+        throw error;
+      }
 
       setUploadSuccess(true);
       await reloadStories();
@@ -109,7 +128,8 @@ export default function StoryProject() {
       }, 1500);
     } catch (err) {
       console.error('Photo upload error:', err);
-      setUploadError('Failed to process image. Please try again with a clear photo of your story.');
+      const backendError = err?.data?.error || err?.data?.message || err?.message;
+      setUploadError(backendError || 'Failed to process image. Please try again with a clear photo of your story.');
     } finally {
       setIsAnalyzing(false);
     }
