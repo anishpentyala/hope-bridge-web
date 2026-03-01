@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Mail, MapPin, Phone, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzbqoay';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkgbbjkb';
 
 
 const submitViaNativeForm = (data) => {

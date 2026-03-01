@@ -11,7 +11,7 @@ import { Mail, MapPin, Phone, Loader2, CheckCircle2, AlertCircle } from 'lucide-
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_NAME_LENGTH = 100;
 const MAX_ORG_LENGTH = 150;
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzbqoay';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkgbbjkb';
 
 const buildFormspreePayload = (data) => {
   const payload = new FormData();
