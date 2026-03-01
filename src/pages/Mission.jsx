@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Heart, Users, BookOpen, Sparkles, Target, Compass, Home as HomeIcon, ArrowRight, Shield, Globe, MessageCircle } from 'lucide-react';
+import { Heart, Users, BookOpen, Target, Compass, Home as HomeIcon, ArrowRight, Shield, Globe, MessageCircle } from 'lucide-react';
 import MentalHealthChart from '@/components/mission/MentalHealthChart';
 import PageBackground from '../components/PageBackground';
 // AnimatedBackground removed — page already has rich visual sections; the blobs were causing GPU lag
@@ -78,30 +78,6 @@ export default function Mission() {
       ],
       color: 'from-violet-500 to-blue-600',
       iconBg: 'bg-violet-500'
-    }
-  ];
-
-  const howWeWork = [
-    {
-      icon: Heart,
-      title: 'Safe Spaces',
-      description: 'Judgment-free environments where Asian teens can share openly, without fear of shame or misunderstanding.',
-      stat: '100%',
-      statLabel: 'Anonymous'
-    },
-    {
-      icon: Users,
-      title: 'Peer Support',
-      description: 'Bringing together teens who share similar cultural backgrounds and challenges, fostering healing through connection.',
-      stat: '50+',
-      statLabel: 'Peer Mentors'
-    },
-    {
-      icon: Sparkles,
-      title: 'Breaking Stigma',
-      description: 'Through storytelling and awareness campaigns, we normalize mental health conversations in Asian communities.',
-      stat: '25',
-      statLabel: 'School Partners'
     }
   ];
 
@@ -272,56 +248,6 @@ export default function Mission() {
                       </li>
                     ))}
                   </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── HOW WE WORK ── with stat cards */}
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 relative overflow-hidden">
-        {/* Decorative grid */}
-        <div className="absolute inset-0 opacity-[0.04]" style={{
-          backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
-        }} />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-14">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-              How We Make It <span className="text-blue-300">Happen</span>
-            </h2>
-            <p className="text-lg text-blue-200 max-w-xl mx-auto">
-              Three pillars that drive everything we do
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {howWeWork.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="group">
-                <div className="rounded-2xl p-8 h-full bg-white/15 border border-blue-400/40 transition-all duration-300 hover:bg-white/20 hover:border-blue-300/60">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/30 border border-blue-400/30 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors">
-                      <item.icon className="w-6 h-6 text-blue-300" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-white counter-glow">{item.stat}</div>
-                      <div className="text-xs text-blue-200">{item.statLabel}</div>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-white/70 leading-relaxed text-sm">{item.description}</p>
                 </div>
               </motion.div>
             ))}
