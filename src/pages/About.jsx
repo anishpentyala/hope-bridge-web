@@ -23,7 +23,7 @@ const teamMembers = [
   { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500' },
   { name: 'Samvid Prabhu',    role: 'Research Department Lead',   email: null,                              initials: 'SP', color: 'from-sky-500 to-blue-600' },
   { name: 'Arnav Malhotra',   role: 'Socials Department Lead',    email: 'reacharnavmalhotra@gmail.com',    initials: 'AM', color: 'from-blue-500 to-indigo-600' },
-  { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500' },
+  { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500', image: '/images/team/ishaan.jpg' },
 ];
 
 const values = [
@@ -178,10 +178,18 @@ export default function About() {
                 transition={{ duration: 0.4, delay: index * 0.07 }}
                 className="group glass-card glow-hover rounded-2xl p-6 text-center border border-blue-100/60 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                {/* Avatar with initials */}
+                {member.image ?
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full max-w-[260px] aspect-[4/5] object-cover rounded-xl mx-auto mb-5 shadow-lg border border-blue-100" /> :
+
+                /* Avatar with initials */
                 <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} mx-auto mb-4 flex items-center justify-center shadow-lg`}>
-                  <span className="text-white font-black text-xl">{member.initials}</span>
-                </div>
+                    <span className="text-white font-black text-xl">{member.initials}</span>
+                  </div>
+
+                }
                 <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
                 <p className="text-blue-600 font-semibold text-sm mt-1">{member.role}</p>
                 {member.email && (
