@@ -482,67 +482,10 @@ export default function StoryProject() {
 
               )}
               </div> :
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {/* Seed stories so the wall is never empty */}
-                {[
-                  {
-                    id: 'seed-1',
-                    title: 'Finding My Voice Between Two Worlds',
-                    author_name: 'Anonymous',
-                    content: 'Growing up, I felt like I was living two lives — one at home where I had to be the "perfect" kid, and one at school where I tried to fit in. HopeBridge helped me realize I don\'t have to choose. My bicultural identity is my superpower.',
-                    topic: 'cultural_identity',
-                    tags: ['identity', 'family_expectations'],
-                    likes: 24,
-                    comments_count: 3,
-                    created_date: '2025-12-15T00:00:00Z',
-                    media_urls: []
-                  },
-                  {
-                    id: 'seed-2',
-                    title: 'When "Just Try Harder" Isn\'t Enough',
-                    author_name: 'Anonymous',
-                    content: 'My parents always said hard work fixes everything. But when I was drowning in AP classes and SAT prep, no amount of "trying harder" helped my anxiety. Talking to peers who understood — that\'s what actually helped.',
-                    topic: 'academic_stress',
-                    tags: ['school_pressure', 'mental_health'],
-                    likes: 31,
-                    comments_count: 5,
-                    created_date: '2026-01-05T00:00:00Z',
-                    media_urls: []
-                  },
-                  {
-                    id: 'seed-3',
-                    title: 'The Conversation I Was Afraid to Have',
-                    author_name: 'Anonymous',
-                    content: 'I finally told my mom I was struggling. I expected her to say "you have nothing to be sad about." Instead, she cried and said she wished she had known sooner. Sometimes our families want to help — they just don\'t know how.',
-                    topic: 'family_pressures',
-                    tags: ['family_expectations', 'mental_health'],
-                    likes: 42,
-                    comments_count: 7,
-                    created_date: '2026-01-20T00:00:00Z',
-                    media_urls: []
-                  },
-                  {
-                    id: 'seed-4',
-                    title: 'You Are Not Alone in This',
-                    author_name: 'Anonymous',
-                    content: 'I thought I was the only Asian kid at my school dealing with this stuff. Turns out, so many of us are going through the same thing. Finding this community changed everything for me.',
-                    topic: 'cultural_identity',
-                    tags: ['identity', 'mental_health'],
-                    likes: 18,
-                    comments_count: 2,
-                    created_date: '2026-02-01T00:00:00Z',
-                    media_urls: []
-                  }
-                ].map((story) => (
-                  <StoryCard
-                    key={story.id}
-                    story={story}
-                    onLike={handleLike}
-                    isLiked={likedStories.includes(story.id)}
-                  />
-                ))}
-              </div>
+            <div className="text-center py-12 bg-white/80 rounded-2xl border border-blue-100">
+              <p className="text-gray-700 font-medium">No stories have been posted yet.</p>
+              <p className="text-gray-500 text-sm mt-2">Be the first to share your story with the community.</p>
+            </div>
             }
           </div>
 
