@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Target, Eye, Users, Mail } from 'lucide-react';
+import { Heart, Mail } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
 
 // kept for backward compat — replaced by PageBackground
@@ -18,15 +18,6 @@ function PageBg() {
 }
 
 const teamMembers = [
-  {
-    name: 'Anish Pentyala',
-    role: 'Web Development Lead',
-    email: 'Anish.n.pentyala@gmail.com',
-    initials: 'AP',
-    color: 'from-blue-500 to-blue-700',
-    image: '/images/team/anish-photo.svg',
-    bio: 'Anish is 14 years old and attends Eastlake High School. He enjoys playing video games and hopes to make an impact on this overlooked problem!',
-  },
   {
     name: 'Rishi Ravikumar',
     role: 'Planning Department Lead',
@@ -46,13 +37,22 @@ const teamMembers = [
     bio: 'Arjun is a 14-year-old at Eastlake High School. An avid track runner and committed trombonist, he hopes to drive positive change within his community.',
   },
   {
-    name: 'Samvid Prabhu',
-    role: 'Research Department Lead',
-    email: 'samvid.s.prabhu@gmail.com',
-    initials: 'SP',
-    color: 'from-sky-500 to-blue-600',
-    image: '/images/team/samvid-photo.svg',
-    bio: 'Samvid is a freshman at Kamiak HS who enjoys business, marketing, and playing guitar. With Indian-Konkani roots and experience living in both Finland and the US, he understands the struggles of dual identity. As the Social Media Marketing Lead, he advocates for Asian teens by spreading awareness of the unique challenges they face.',
+    name: 'Anish Pentyala',
+    role: 'Web Development Lead',
+    email: 'Anish.n.pentyala@gmail.com',
+    initials: 'AP',
+    color: 'from-blue-500 to-blue-700',
+    image: '/images/team/anish-photo.svg',
+    bio: 'Anish is 14 years old and attends Eastlake High School. He enjoys playing video games and hopes to make an impact on this overlooked problem!',
+  },
+  {
+    name: 'Ishaan Kejriwal',
+    role: 'Event Organization Lead',
+    email: 'ishaankej@outlook.com',
+    initials: 'IK',
+    color: 'from-indigo-600 to-blue-500',
+    image: '/images/team/ishaan-photo.svg',
+    bio: 'Ishaan is a freshman at Eastlake High School who loves helping his community in any way possible. As a passionate coder and track runner, he aims to support Asian American teens in navigating the unique challenges addressed by Hope Bridge.',
   },
   {
     name: 'Arnav Malhotra',
@@ -64,20 +64,14 @@ const teamMembers = [
     bio: 'Arnav is a 14-year-old student at Eastlake High School. He has a deep passion for soccer and aims to support other Asian American teens facing struggles similar to his own.',
   },
   {
-    name: 'Ishaan Kejriwal',
-    role: 'Event Organization Lead',
-    email: 'ishaankej@outlook.com',
-    initials: 'IK',
-    color: 'from-indigo-600 to-blue-500',
-    image: '/images/team/ishaan-photo.svg',
-    bio: 'Ishaan is a freshman at Eastlake High School who loves helping his community in any way possible. As a passionate coder and track runner, he aims to support Asian American teens in navigating the unique challenges addressed by Hope Bridge.',
+    name: 'Samvid Prabhu',
+    role: 'Research Department Lead',
+    email: 'samvid.s.prabhu@gmail.com',
+    initials: 'SP',
+    color: 'from-sky-500 to-blue-600',
+    image: '/images/team/samvid-photo.svg',
+    bio: 'Samvid is a freshman at Kamiak HS who enjoys business, marketing, and playing guitar. With Indian-Konkani roots and experience living in both Finland and the US, he understands the struggles of dual identity.',
   },
-];
-
-const values = [
-  { icon: Target, title: 'Our Mission', desc: 'Culturally informed mental health support for Asian American teens.', bg: 'bg-blue-50', border: 'border-blue-200', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
-  { icon: Eye,    title: 'Our Vision',  desc: 'Asian American teens thriving emotionally, with mental health conversations fully normalized.', bg: 'bg-indigo-50', border: 'border-indigo-200', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-600' },
-  { icon: Heart,  title: 'Our Values',  desc: 'Cultural sensitivity, peer support, accessibility, and actively breaking stigma.', bg: 'bg-sky-50', border: 'border-sky-200', iconBg: 'bg-sky-100', iconColor: 'text-sky-600' },
 ];
 
 export default function About() {
@@ -160,42 +154,6 @@ export default function About() {
               </div>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── MISSION / VISION / VALUES ── */}
-      <section className="py-16 px-6 lg:px-8 bg-white/80 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-black text-gray-900 mb-3">
-              What Drives <span className="text-shimmer">Us</span>
-            </h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Our mission, vision, and the values we hold at the core of everything we do.</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {values.map(({ icon: Icon, title, desc, bg, border, iconBg, iconColor }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`glow-hover ${bg} rounded-2xl p-8 border ${border} hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
-              >
-                <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-5`}>
-                  <Icon className={`w-6 h-6 ${iconColor}`} />
-                </div>
-                <h3 className="text-xl font-black text-gray-900 mb-3">{title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">{desc}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
