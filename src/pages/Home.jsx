@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import CountUp from '../components/CountUp';
 import Hero from '@/components/home/Hero';
 import Mission from '@/components/home/Mission';
 import Problem from '@/components/home/Problem';
@@ -68,9 +69,7 @@ export default function Home() {
                     transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
                     className="text-center"
                   >
-                    <div className="text-5xl lg:text-6xl font-black text-blue-600 mb-3">
-                      {goal.target}
-                    </div>
+                    <CountUp value={goal.target} className="text-5xl lg:text-6xl font-black text-blue-600 mb-3 block" />
                     <p className="text-gray-900 font-bold text-base">
                       {goal.label}
                     </p>

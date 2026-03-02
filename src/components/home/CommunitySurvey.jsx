@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ClipboardList, TrendingUp, Users, Heart } from 'lucide-react';
+import CountUp from '../CountUp';
 
 export default function CommunitySurvey() {
   return (
@@ -24,17 +25,17 @@ export default function CommunitySurvey() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
               <TrendingUp className="w-6 h-6 mx-auto mb-2 text-blue-200" />
-              <div className="text-2xl font-bold">200+</div>
+              <CountUp value="200+" className="text-2xl font-bold block" />
               <div className="text-xs text-blue-100">Responses collected</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
               <Users className="w-6 h-6 mx-auto mb-2 text-blue-200" />
-              <div className="text-2xl font-bold">5 min</div>
+              <CountUp value="5 min" className="text-2xl font-bold block" />
               <div className="text-xs text-blue-100">Average time to complete</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
               <Heart className="w-6 h-6 mx-auto mb-2 text-blue-200" />
-              <div className="text-2xl font-bold">100%</div>
+              <CountUp value="100%" className="text-2xl font-bold block" />
               <div className="text-xs text-blue-100">Anonymous & confidential</div>
             </div>
           </div>

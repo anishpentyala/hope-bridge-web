@@ -155,19 +155,14 @@ export default function StoryProject() {
         setStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         setFilteredStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         
-        // Persist like update
         updateLocalStoryLikes(storyId, newLikes);
         await updateSupabaseStoryLikes(storyId, newLikes);
       } else {
         // Like
         const newLikes = story.likes + 1;
         setLikedStories((prev) => [...prev, storyId]);
-        
-        // Update local state immediately
         setStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
         setFilteredStories((prev) => prev.map((s) => s.id === storyId ? { ...s, likes: newLikes } : s));
-        
-        // Persist like update
         updateLocalStoryLikes(storyId, newLikes);
         await updateSupabaseStoryLikes(storyId, newLikes);
       }

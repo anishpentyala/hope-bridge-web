@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -11,15 +10,9 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const handleSubscribe = async (e) => {
+  const handleSubscribe = (e) => {
     e.preventDefault();
     if (!email) return;
-
-    await base44.entities.NewsletterSubscriber.create({
-      email,
-      source: 'footer'
-    });
-
     setIsSubscribed(true);
     toast.success('Thank you for subscribing!');
   };

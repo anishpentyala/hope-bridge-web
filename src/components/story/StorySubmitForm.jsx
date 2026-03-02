@@ -4,7 +4,6 @@ import { BookOpen, Lightbulb, Heart, Loader2, CheckCircle2, AlertCircle, Image, 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { base44 } from '@/api/client';
 import BackgroundElements from '@/components/BackgroundElements';
 import { moderateStoryText } from '@/lib/contentModeration';
 
@@ -94,14 +93,12 @@ export default function StorySubmitForm() {
 
       let response;
       if (hasMedia) {
-        const multipartFormData = new FormData();
-        multipartFormData.append('title', payload.title);
-        multipartFormData.append('author_name', payload.author_name);
-        multipartFormData.append('content', payload.content);
-        multipartFormData.append('topic', payload.topic);
-
-        mediaFiles.forEach((file) => {
-          multipartFormData.append('media', file);
+        const story = await createLocalStory({
+          title: payload.title,
+          author_name: payload.author_name,
+          content: payload.content,
+          topic: payload.topic,
+          mediaFiles
         });
 
         try {
