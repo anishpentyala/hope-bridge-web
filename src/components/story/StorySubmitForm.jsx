@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import BackgroundElements from '@/components/BackgroundElements';
 import { moderateStoryText } from '@/lib/contentModeration';
+import { createLocalStory } from '@/lib/localStories';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const topics = [
@@ -85,54 +86,18 @@ export default function StorySubmitForm() {
 
     setIsSubmitting(true);
     try {
-      const hasMedia = mediaFiles.length > 0;
-
       const payload = {
         ...formData,
         title: formData.title.trim(),
         author_name: 'Anonymous',
         content: formData.content.trim(),
-        media_urls: [],
-        audio_url: null
+        mediaFiles
       };
 
-      let response;
-      if (hasMedia) {
-        const story = await createLocalStory({
-          title: payload.title,
-          author_name: payload.author_name,
-          content: payload.content,
-          topic: payload.topic,
-          mediaFiles
-        });
-
-        try {
-          response = await base44.request('/functions/submitStoryWithMedia', {
-            method: 'POST',
-            body: multipartFormData
-          });
-        } catch {
-          response = await base44.request('/stories/submit-with-media', {
-            method: 'POST',
-            body: multipartFormData
-          });
-        }
-      } else {
-        try {
-          response = await base44.functions.invoke('submitStory', payload);
-        } catch {
-          response = await base44.request('/stories/submit', {
-            method: 'POST',
-            body: payload
-          });
-        }
-      }
-
-      if (!response?.story && response?.success !== true) {
-        throw new Error('Unexpected response from story submission endpoint.');
-      }
+      await createLocalStory(payload);
 
       setIsSuccess(true);
+      setMediaFiles([]);
     } catch (err) {
       const backendError = err?.data?.error || err?.data?.message || err?.message;
       setError(backendError || 'Failed to submit story. Please try again.');
