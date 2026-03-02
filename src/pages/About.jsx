@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Target, Eye, Users, Mail } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
@@ -18,12 +18,12 @@ function PageBg() {
 }
 
 const teamMembers = [
-  { name: 'Anish Pentyala',   role: 'Web Development Lead',      email: 'Anish.n.pentyala@gmail.com',      initials: 'AP', color: 'from-blue-500 to-blue-700',    image: '/images/team/anish.svg' },
-  { name: 'Rishi Ravikumar',  role: 'Planning Department Lead',   email: 'rishirkumar@outlook.com',         initials: 'RR', color: 'from-indigo-500 to-blue-600',  image: '/images/team/rishi.svg' },
-  { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500',    image: '/images/team/arjun.svg' },
-  { name: 'Samvid Prabhu',    role: 'Research Department Lead',   email: 'samvid.s.prabhu@gmail.com',       initials: 'SP', color: 'from-sky-500 to-blue-600',     image: '/images/team/samvid.svg' },
-  { name: 'Arnav Malhotra',   role: 'Socials Department Lead',    email: 'reacharnavmalhotra@gmail.com',    initials: 'AM', color: 'from-blue-500 to-indigo-600',  image: '/images/team/arnav.svg' },
-  { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500',  image: '/images/team/ishaan.svg' },
+  { name: 'Anish Pentyala',   role: 'Web Development Lead',      email: 'Anish.n.pentyala@gmail.com',      initials: 'AP', color: 'from-blue-500 to-blue-700', image: '/images/team/anish.svg' },
+  { name: 'Rishi Ravikumar',  role: 'Planning Department Lead',   email: 'rishirkumar@outlook.com',                              initials: 'RR', color: 'from-indigo-500 to-blue-600', image: '/images/team/rishi.svg' },
+  { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500', image: '/images/team/arjun.svg' },
+  { name: 'Samvid Prabhu',    role: 'Research Department Lead',   email: 'samvid.s.prabhu@gmail.com',                              initials: 'SP', color: 'from-sky-500 to-blue-600', image: '/images/team/samvid.svg' },
+  { name: 'Arnav Malhotra',   role: 'Socials Department Lead',    email: 'reacharnavmalhotra@gmail.com',    initials: 'AM', color: 'from-blue-500 to-indigo-600', image: '/images/team/arnav.svg' },
+  { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500', image: '/images/team/ishaan.svg' },
 ];
 
 const values = [
@@ -170,37 +170,51 @@ export default function About() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.07 }}
-                className="group glass-card glow-hover rounded-2xl p-6 text-center border border-blue-100/60 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                {/* Avatar — photo if available, else initials */}
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} mx-auto mb-4 flex items-center justify-center shadow-lg overflow-hidden`}>
-                  {member.image
-                    ? <img src={member.image} alt={member.name} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='flex'; }} />
-                    : null}
-                  <span className="text-white font-black text-xl" style={{ display: member.image ? 'none' : 'flex' }}>{member.initials}</span>
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
-                <p className="text-blue-600 font-semibold text-sm mt-1">{member.role}</p>
-                {member.email && (
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    <Mail className="w-3 h-3" />
-                    {member.email}
-                  </a>
-                )}
-              </motion.div>
+              <TeamMemberCard key={member.name} member={member} index={index} />
             ))}
           </div>
         </div>
       </section>
     </div>
+  );
+}
+
+function TeamMemberCard({ member, index }) {
+  const [showImage, setShowImage] = useState(Boolean(member.image));
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.07 }}
+      className="group glass-card glow-hover rounded-2xl p-6 text-center border border-blue-100/60 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col items-center"
+    >
+      {showImage ? (
+        <img
+          src={member.image}
+          alt={member.name}
+          loading="lazy"
+          onError={() => setShowImage(false)}
+          className="w-full max-w-[260px] aspect-[4/5] object-cover rounded-xl mx-auto mb-5 shadow-lg border border-blue-100"
+        />
+      ) : (
+        <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} mx-auto mb-4 flex items-center justify-center shadow-lg`}>
+          <span className="text-white font-black text-xl">{member.initials}</span>
+        </div>
+      )}
+
+      <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
+      <p className="text-blue-600 font-semibold text-sm mt-1">{member.role}</p>
+      {member.email && (
+        <a
+          href={`mailto:${member.email}`}
+          className="mt-3 inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-blue-600 transition-colors"
+        >
+          <Mail className="w-3 h-3" />
+          {member.email}
+        </a>
+      )}
+    </motion.div>
   );
 }

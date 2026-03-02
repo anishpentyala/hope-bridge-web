@@ -81,7 +81,7 @@ export default function Schools() {
 
     setIsSubmitting(true);
     try {
-      const res = await fetch('https://formspree.io/f/mldgebll', {
+      const res = await fetch('https://formspree.io/f/mojnzdry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({

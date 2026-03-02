@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Heart, Users, Calendar, BookOpen, Loader2, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzbqoay';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgolbkbp';
 
 const roles = [
   { icon: Users,    label: 'Peer Mentor',         desc: 'Support fellow teens through 1-on-1 conversations and group sessions',      accent: 'from-blue-500 to-indigo-500',   ring: 'border-blue-400',   bg: 'bg-blue-50' },
