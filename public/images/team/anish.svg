@@ -1,0 +1,18 @@
+<svg width="520" height="650" viewBox="0 0 520 650" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anish Pentyala profile image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="520" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="520" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="650" rx="32" fill="url(#bg)"/>
+  <rect width="520" height="180" rx="32" fill="url(#shine)"/>
+  <circle cx="260" cy="245" r="90" fill="white" fill-opacity="0.25"/>
+  <rect x="130" y="345" width="260" height="180" rx="120" fill="white" fill-opacity="0.2"/>
+  <text x="260" y="250" text-anchor="middle" font-size="72" font-family="Inter, Arial, sans-serif" font-weight="800" fill="white">AP</text>
+  <text x="260" y="582" text-anchor="middle" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="700" fill="white">Anish Pentyala</text>
+</svg>

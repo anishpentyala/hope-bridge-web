@@ -18,12 +18,12 @@ function PageBg() {
 }
 
 const teamMembers = [
-  { name: 'Anish Pentyala',   role: 'Web Development Lead',      email: 'Anish.n.pentyala@gmail.com',      initials: 'AP', color: 'from-blue-500 to-blue-700' },
-  { name: 'Rishi Ravikumar',  role: 'Planning Department Lead',   email: null,                              initials: 'RR', color: 'from-indigo-500 to-blue-600' },
-  { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500' },
-  { name: 'Samvid Prabhu',    role: 'Research Department Lead',   email: null,                              initials: 'SP', color: 'from-sky-500 to-blue-600' },
-  { name: 'Arnav Malhotra',   role: 'Socials Department Lead',    email: 'reacharnavmalhotra@gmail.com',    initials: 'AM', color: 'from-blue-500 to-indigo-600' },
-  { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500' },
+  { name: 'Anish Pentyala',   role: 'Web Development Lead',      email: 'Anish.n.pentyala@gmail.com',      initials: 'AP', color: 'from-blue-500 to-blue-700',    image: '/images/team/anish.svg' },
+  { name: 'Rishi Ravikumar',  role: 'Planning Department Lead',   email: 'rishirkumar@outlook.com',         initials: 'RR', color: 'from-indigo-500 to-blue-600',  image: '/images/team/rishi.svg' },
+  { name: 'Arjun Kuchi',      role: 'Field Work Lead',            email: 'stingingnettle1024@gmail.com',    initials: 'AK', color: 'from-blue-600 to-cyan-500',    image: '/images/team/arjun.svg' },
+  { name: 'Samvid Prabhu',    role: 'Research Department Lead',   email: 'samvid.s.prabhu@gmail.com',       initials: 'SP', color: 'from-sky-500 to-blue-600',     image: '/images/team/samvid.svg' },
+  { name: 'Arnav Malhotra',   role: 'Socials Department Lead',    email: 'reacharnavmalhotra@gmail.com',    initials: 'AM', color: 'from-blue-500 to-indigo-600',  image: '/images/team/arnav.svg' },
+  { name: 'Ishaan Kejriwal',  role: 'Event Organization Lead',    email: 'ishaankej@outlook.com',           initials: 'IK', color: 'from-indigo-600 to-blue-500',  image: '/images/team/ishaan.svg' },
 ];
 
 const values = [
@@ -178,9 +178,12 @@ export default function About() {
                 transition={{ duration: 0.4, delay: index * 0.07 }}
                 className="group glass-card glow-hover rounded-2xl p-6 text-center border border-blue-100/60 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                {/* Avatar with initials */}
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} mx-auto mb-4 flex items-center justify-center shadow-lg`}>
-                  <span className="text-white font-black text-xl">{member.initials}</span>
+                {/* Avatar — photo if available, else initials */}
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} mx-auto mb-4 flex items-center justify-center shadow-lg overflow-hidden`}>
+                  {member.image
+                    ? <img src={member.image} alt={member.name} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='flex'; }} />
+                    : null}
+                  <span className="text-white font-black text-xl" style={{ display: member.image ? 'none' : 'flex' }}>{member.initials}</span>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
                 <p className="text-blue-600 font-semibold text-sm mt-1">{member.role}</p>
