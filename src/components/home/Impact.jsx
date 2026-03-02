@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import CountUp from '../CountUp';
 
 const goals = [
   { target: "500+", label: "Teens supported by 2025" },
@@ -54,9 +55,7 @@ export default function Impact() {
                   transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-4xl lg:text-5xl font-bold text-white mb-2">
-                    {goal.target}
-                  </div>
+                  <CountUp value={goal.target} className="text-4xl lg:text-5xl font-bold text-white mb-2 block" />
                   <p className="text-white/80 text-sm">
                     {goal.label}
                   </p>

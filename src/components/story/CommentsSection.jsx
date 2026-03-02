@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { base44 } from '@/api/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send, Loader2 } from 'lucide-react';
@@ -9,58 +8,26 @@ export default function CommentsSection({ storyId, commentsCount }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [authorName, setAuthorName] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const loadComments = async () => {
-      try {
-        const result = await base44.entities.StoryComment.filter({ story_id: storyId, status: 'approved' }, '-created_date');
-        setComments(result);
-      } catch (error) {
-        console.error('Error loading comments:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadComments();
-  }, [storyId]);
 
   const handleSubmitComment = async () => {
     if (!newComment.trim() || !authorName.trim()) return;
 
     setIsSubmitting(true);
-    try {
-      await base44.entities.StoryComment.create({
-        story_id: storyId,
+    // Simulate a brief delay for UX
+    await new Promise((r) => setTimeout(r, 500));
+
+    setComments((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
         author_name: authorName.trim(),
         content: newComment.trim(),
-        status: 'approved'
-      });
-      
-      // Update comment count
-      try {
-        await base44.functions.invoke('updateCommentCount', {
-          storyId: storyId,
-          increment: 1
-        });
-      } catch (error) {
-        console.error('Failed to update comment count:', error);
-      }
-      
-      // Reload comments
-      const result = await base44.entities.StoryComment.filter({ story_id: storyId, status: 'approved' }, '-created_date');
-      setComments(result);
-      
-      setNewComment('');
-      setAuthorName('');
-      alert('Comment posted successfully!');
-    } catch (error) {
-      console.error('Error submitting comment:', error);
-      alert('Failed to submit comment. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+      },
+    ]);
+    setNewComment('');
+    setAuthorName('');
+    setIsSubmitting(false);
   };
 
   return (
@@ -69,7 +36,7 @@ export default function CommentsSection({ storyId, commentsCount }) {
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
       className="px-6 py-4 bg-gray-50 border-t border-blue-100 space-y-4">
-      
+
       {/* Comment Input */}
       <div className="space-y-2">
         <Input
@@ -95,13 +62,11 @@ export default function CommentsSection({ storyId, commentsCount }) {
             {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           </Button>
         </div>
-        <p className="text-xs text-gray-500">Comments are moderated and will appear after approval</p>
+        <p className="text-xs text-gray-500">Comments are visible to you during this session</p>
       </div>
 
-      {/* Approved Comments */}
-      {isLoading ? (
-        <p className="text-xs text-gray-500">Loading comments...</p>
-      ) : comments.length > 0 ? (
+      {/* Comments */}
+      {comments.length > 0 ? (
         <div className="space-y-3 mt-4">
           {comments.map((comment) => (
             <motion.div
@@ -122,7 +87,7 @@ export default function CommentsSection({ storyId, commentsCount }) {
           ))}
         </div>
       ) : (
-        <p className="text-xs text-gray-500">No approved comments yet. Be the first!</p>
+        <p className="text-xs text-gray-500">No comments yet. Be the first!</p>
       )}
     </motion.div>
   );
