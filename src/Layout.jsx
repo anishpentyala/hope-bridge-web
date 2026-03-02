@@ -377,8 +377,9 @@ export default function Layout({ children, currentPageName }) {
                   alt="HopeBridge"
                   className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
-                <span className="text-xl font-bold text-gray-900 tracking-tight">
-                  Hope<span className="text-blue-600">Bridge</span>
+                <span className="font-bold text-gray-900 tracking-tight leading-none flex flex-col">
+                  <span className="text-lg">Hope</span>
+                  <span className="text-lg text-blue-600">Bridge</span>
                 </span>
               </Link>
 
@@ -473,11 +474,11 @@ export default function Layout({ children, currentPageName }) {
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.25 }}
-                className="lg:hidden bg-blue-50 border-t border-blue-100 overflow-hidden"
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                className="lg:hidden bg-blue-50 border-t border-blue-100"
               >
                 <div className="max-w-7xl mx-auto px-6 py-4 space-y-1">
                   {navLinks.map((link) => {
