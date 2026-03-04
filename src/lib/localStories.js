@@ -1,4 +1,5 @@
 const LOCAL_STORIES_KEY = 'hopebridge_local_stories';
+const LOCAL_COMMENTS_KEY = 'hopebridge_local_comments';
 
 const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL || '').replace(/\/+$/, '');
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -21,6 +22,13 @@ const mapSupabaseStory = (story = {}) => ({
   likes: Number(story.likes || 0),
   created_date: story.created_date || story.created_at || new Date().toISOString(),
   source: story.source || 'supabase'
+});
+
+const mapSupabaseComment = (comment = {}) => ({
+  ...comment,
+  author_name: (comment.author_name || 'Anonymous').trim() || 'Anonymous',
+  content: comment.content || '',
+  created_date: comment.created_date || comment.created_at || new Date().toISOString()
 });
 
 const supabaseRequest = async (path, { method = 'GET', body } = {}) => {
@@ -64,6 +72,19 @@ const readStories = () => {
 const writeStories = (stories) => {
   if (typeof window === 'undefined') return;
   window.localStorage.setItem(LOCAL_STORIES_KEY, JSON.stringify(stories));
+};
+
+const readComments = () => {
+  if (typeof window === 'undefined') return [];
+  const raw = window.localStorage.getItem(LOCAL_COMMENTS_KEY);
+  if (!raw) return [];
+  const parsed = safeJsonParse(raw, []);
+  return Array.isArray(parsed) ? parsed : [];
+};
+
+const writeComments = (comments) => {
+  if (typeof window === 'undefined') return;
+  window.localStorage.setItem(LOCAL_COMMENTS_KEY, JSON.stringify(comments));
 };
 
 const inferTags = (text = '', topic = '') => {
@@ -199,6 +220,60 @@ export const updateSupabaseStoryLikes = async (storyId, likes) => {
     console.error('Failed to update Supabase like:', error);
     return false;
   }
+};
+
+export const listStoryComments = async (storyId) => {
+  if (!storyId) return [];
+
+  if (!hasSupabaseConfig()) {
+    return readComments()
+      .filter((comment) => comment.story_id === storyId)
+      .sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
+  }
+
+  try {
+    const data = await supabaseRequest(`/story_comments?story_id=eq.${encodeURIComponent(storyId)}&select=*&order=created_date.asc`);
+    if (!Array.isArray(data)) return [];
+    return data.map(mapSupabaseComment);
+  } catch (error) {
+    console.error('Failed to load story comments:', error);
+    return [];
+  }
+};
+
+export const createStoryComment = async ({ storyId, author_name, content }) => {
+  const sanitizedName = (author_name || '').trim();
+  const sanitizedContent = (content || '').trim();
+
+  if (!storyId || !sanitizedName || !sanitizedContent) {
+    throw new Error('Missing storyId, author_name, or content');
+  }
+
+  if (!hasSupabaseConfig()) {
+    const localComment = {
+      id: `local_comment_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      story_id: storyId,
+      author_name: sanitizedName,
+      content: sanitizedContent,
+      created_date: new Date().toISOString()
+    };
+    const comments = readComments();
+    comments.push(localComment);
+    writeComments(comments);
+    return localComment;
+  }
+
+  const data = await supabaseRequest('/story_comments', {
+    method: 'POST',
+    body: {
+      story_id: storyId,
+      author_name: sanitizedName,
+      content: sanitizedContent
+    }
+  });
+
+  const created = Array.isArray(data) ? data[0] : data;
+  return created ? mapSupabaseComment(created) : null;
 };
 
 export const mergeStories = (remoteStories = [], localStories = []) => {

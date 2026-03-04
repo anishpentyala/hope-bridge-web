@@ -116,6 +116,26 @@ create policy "stories likes are updatable by everyone"
   for update
   using (true)
   with check (true);
+
+create table if not exists public.story_comments (
+  id uuid primary key default gen_random_uuid(),
+  story_id uuid not null references public.stories(id) on delete cascade,
+  author_name text not null,
+  content text not null,
+  created_date timestamptz not null default now()
+);
+
+alter table public.story_comments enable row level security;
+
+create policy "comments are readable by everyone"
+  on public.story_comments
+  for select
+  using (true);
+
+create policy "comments are insertable by everyone"
+  on public.story_comments
+  for insert
+  with check (true);
 ```
 
 The app still keeps localStorage fallback for offline/local-only mode.

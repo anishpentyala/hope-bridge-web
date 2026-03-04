@@ -19,7 +19,7 @@ const topicLabels = {
   family_pressures: 'Family Pressures'
 };
 
-export default function StoryCard({ story, onLike, isLiked }) {
+export default function StoryCard({ story, onLike, isLiked, onCommentAdded }) {
   const [showComments, setShowComments] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
@@ -147,7 +147,7 @@ export default function StoryCard({ story, onLike, isLiked }) {
 
       {/* Comments Section */}
       {showComments && (
-        <CommentsSection storyId={story.id} commentsCount={story.comments_count} />
+        <CommentsSection storyId={story.id} onCommentAdded={onCommentAdded} />
       )}
 
       {/* Full Text Modal */}

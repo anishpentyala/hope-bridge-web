@@ -152,6 +152,20 @@ export default function StoryProject() {
     }
   }, [likedStories, stories]);
 
+
+  const handleCommentAdded = useCallback((storyId) => {
+    setStories((prev) => prev.map((story) =>
+      story.id === storyId
+        ? { ...story, comments_count: Number(story.comments_count || 0) + 1 }
+        : story
+    ));
+    setFilteredStories((prev) => prev.map((story) =>
+      story.id === storyId
+        ? { ...story, comments_count: Number(story.comments_count || 0) + 1 }
+        : story
+    ));
+  }, []);
+
   const topicFilteredStories = selectedTopic ?
   filteredStories.filter((s) => s.topic === selectedTopic) :
   filteredStories;
@@ -431,7 +445,8 @@ export default function StoryProject() {
           <FeaturedStories
             stories={featuredStories}
             onLike={handleLike}
-            likedStories={likedStories} />
+            likedStories={likedStories}
+            onCommentAdded={handleCommentAdded} />
 
           }
 
@@ -459,7 +474,8 @@ export default function StoryProject() {
                 key={story.id}
                 story={story}
                 onLike={handleLike}
-                isLiked={likedStories.includes(story.id)} />
+                isLiked={likedStories.includes(story.id)}
+                onCommentAdded={handleCommentAdded} />
 
               )}
               </div> :

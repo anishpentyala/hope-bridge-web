@@ -1,33 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send, Loader2 } from 'lucide-react';
+import { createStoryComment, listStoryComments } from '@/lib/localStories';
 
-export default function CommentsSection({ storyId, commentsCount }) {
+export default function CommentsSection({ storyId, onCommentAdded }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadComments = async () => {
+      setIsLoading(true);
+      setError('');
+      const data = await listStoryComments(storyId);
+      if (!isMounted) return;
+      setComments(data);
+      setIsLoading(false);
+    };
+
+    loadComments();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [storyId]);
 
   const handleSubmitComment = async () => {
     if (!newComment.trim() || !authorName.trim()) return;
 
     setIsSubmitting(true);
-    // Simulate a brief delay for UX
-    await new Promise((r) => setTimeout(r, 500));
+    setError('');
 
-    setComments((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        author_name: authorName.trim(),
-        content: newComment.trim(),
-      },
-    ]);
-    setNewComment('');
-    setAuthorName('');
-    setIsSubmitting(false);
+    try {
+      const created = await createStoryComment({
+        storyId,
+        author_name: authorName,
+        content: newComment
+      });
+
+      if (created) {
+        setComments((prev) => [...prev, created]);
+        onCommentAdded?.(storyId);
+      }
+
+      setNewComment('');
+      setAuthorName('');
+    } catch (err) {
+      setError(err?.message || 'Failed to post comment. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -62,11 +91,13 @@ export default function CommentsSection({ storyId, commentsCount }) {
             {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           </Button>
         </div>
-        <p className="text-xs text-gray-500">Comments are visible to you during this session</p>
+        {error ? <p className="text-xs text-red-600">{error}</p> : null}
       </div>
 
       {/* Comments */}
-      {comments.length > 0 ? (
+      {isLoading ? (
+        <p className="text-xs text-gray-500">Loading comments...</p>
+      ) : comments.length > 0 ? (
         <div className="space-y-3 mt-4">
           {comments.map((comment) => (
             <motion.div

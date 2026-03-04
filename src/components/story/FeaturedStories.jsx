@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import StoryCard from './StoryCard';
 
-export default function FeaturedStories({ stories, onLike, likedStories }) {
+export default function FeaturedStories({ stories, onLike, likedStories, onCommentAdded }) {
   return (
     <div className="mb-20">
       <motion.div
@@ -32,7 +32,8 @@ export default function FeaturedStories({ stories, onLike, likedStories }) {
             <StoryCard
               story={story}
               onLike={onLike}
-              isLiked={likedStories.includes(story.id)} />
+              isLiked={likedStories.includes(story.id)}
+              onCommentAdded={onCommentAdded} />
           </motion.div>
         ))}
       </div>
