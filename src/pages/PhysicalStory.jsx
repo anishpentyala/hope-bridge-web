@@ -86,7 +86,7 @@ export default function PhysicalStory() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 3, repeat: Infinity }}
               className="text-6xl mb-6 inline-block">
-              📸
+              
             </motion.div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight px-4">
               Turn Your{' '}
@@ -137,10 +137,10 @@ export default function PhysicalStory() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {[
-              { num: '1', title: 'Write Your Story', desc: 'Pen down your thoughts on paper', icon: '✍️' },
-              { num: '2', title: 'Take a Photo', desc: 'Capture it with your camera', icon: '📷' },
-              { num: '3', title: 'AI Reads It', desc: 'We extract the text instantly', icon: '🤖' },
-              { num: '4', title: 'Share to World', desc: 'Join thousands in our community', icon: '🌍' },
+              { num: '1', title: 'Write Your Story', desc: 'Pen down your thoughts on paper', icon: '' },
+              { num: '2', title: 'Take a Photo', desc: 'Capture it with your camera', icon: '' },
+              { num: '3', title: 'AI Reads It', desc: 'We extract the text instantly', icon: '' },
+              { num: '4', title: 'Share to World', desc: 'Join thousands in our community', icon: '' },
             ].map((step, idx) => (
               <motion.div
                 key={idx}
@@ -159,7 +159,7 @@ export default function PhysicalStory() {
                 </div>
                 {idx < 3 && (
                   <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
-                    <div className="text-2xl text-blue-500">→</div>
+                    <div className="text-2xl text-blue-500"></div>
                   </div>
                 )}
               </motion.div>
@@ -257,7 +257,7 @@ export default function PhysicalStory() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 rounded-xl p-5 sm:p-8 border border-blue-500/30 hover:border-blue-400/60 transition">
-              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">📝</div>
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4"></div>
               <h4 className="text-white font-bold text-lg sm:text-xl mb-2 sm:mb-3">Clear, Legible Text</h4>
               <p className="text-gray-300 text-sm sm:text-base">Use dark ink on light paper. Avoid cursive if possible. Make sure handwriting is clear and spaced out for perfect recognition.</p>
             </motion.div>
@@ -267,7 +267,7 @@ export default function PhysicalStory() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 rounded-xl p-5 sm:p-8 border border-blue-500/30 hover:border-blue-400/60 transition">
-              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">💡</div>
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4"></div>
               <h4 className="text-white font-bold text-lg sm:text-xl mb-2 sm:mb-3">Excellent Lighting</h4>
               <p className="text-gray-300 text-sm sm:text-base">Natural daylight is best. Avoid shadows and glare. Use a bright room or well-lit outdoor area for optimal photo quality.</p>
             </motion.div>
@@ -278,7 +278,7 @@ export default function PhysicalStory() {
               transition={{ delay: 0.1 }}
               viewport={{ once: true }}
               className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 rounded-xl p-5 sm:p-8 border border-blue-500/30 hover:border-blue-400/60 transition">
-              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">📐</div>
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4"></div>
               <h4 className="text-white font-bold text-lg sm:text-xl mb-2 sm:mb-3">Straight Alignment</h4>
               <p className="text-gray-300 text-sm sm:text-base">Hold the camera perpendicular to the paper. Avoid tilted or angled shots. Keep the entire page in frame and centered.</p>
             </motion.div>
@@ -289,7 +289,7 @@ export default function PhysicalStory() {
               transition={{ delay: 0.1 }}
               viewport={{ once: true }}
               className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 rounded-xl p-5 sm:p-8 border border-blue-500/30 hover:border-blue-400/60 transition">
-              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">📄</div>
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4"></div>
               <h4 className="text-white font-bold text-lg sm:text-xl mb-2 sm:mb-3">Complete Story</h4>
               <p className="text-gray-300 text-sm sm:text-base">Capture the full narrative in one or multiple clear photos. Include all pages if multi-page. Check before uploading.</p>
             </motion.div>

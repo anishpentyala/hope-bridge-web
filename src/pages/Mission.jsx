@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Heart, BookOpen, Compass, Home as HomeIcon, ArrowRight, Shield, Globe, MessageCircle } from 'lucide-react';
-import MentalHealthChart from '@/components/mission/MentalHealthChart';
+import { Heart, BookOpen, Compass, Home as HomeIcon, ArrowRight } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
 // AnimatedBackground removed, page already has rich visual sections; the blobs were causing GPU lag
 
@@ -163,21 +162,6 @@ export default function Mission() {
         </div>
       </section>
 
-      {/* ── DATA VISUALIZATION ── */}
-      <section className="py-16 px-6 lg:px-8 bg-gray-50/80">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">The Data Tells the Story</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Understanding the mental health landscape for Asian American youth</p>
-          </motion.div>
-          <MentalHealthChart />
-        </div>
-      </section>
-
       {/* ── THREE CORE GOALS ── with gradient cards */}
       <section className="py-20 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -221,44 +205,6 @@ export default function Mission() {
                       </li>
                     ))}
                   </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHY THIS MATTERS ── big impact stats */}
-      <section className="py-20 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-14">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Why This Work <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">Matters</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { stat: '2.5x', label: 'Higher depression rates in Asian American teens', icon: Shield, color: 'from-blue-600 to-blue-700' },
-              { stat: '30%', label: 'Have seriously considered suicide', icon: MessageCircle, color: 'from-blue-600 to-blue-700' },
-              { stat: '92%', label: 'Never receive professional mental health support', icon: Globe, color: 'from-blue-600 to-blue-700' }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="group">
-                <div className="relative bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 text-center overflow-hidden">
-                  {/* Top gradient accent */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${item.color}`} />
-                  <div className="text-5xl font-black text-blue-600 mb-3">{item.stat}</div>
-                  <p className="text-gray-600 text-sm leading-relaxed">{item.label}</p>
                 </div>
               </motion.div>
             ))}

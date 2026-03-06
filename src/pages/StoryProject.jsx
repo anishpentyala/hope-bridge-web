@@ -352,7 +352,7 @@ export default function StoryProject() {
                   transition={{ delay: 0.2 }}
                   className="mb-8">
                   <span className="inline-block px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 text-white font-bold text-sm">
-                    ✨ Share Your Experience
+                     Share Your Experience
                   </span>
                 </motion.div>
                 

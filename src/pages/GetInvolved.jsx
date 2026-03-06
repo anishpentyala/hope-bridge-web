@@ -118,10 +118,6 @@ export default function GetInvolved() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 border border-white/25 text-white text-sm font-medium mb-6">
-              <HandHeart className="w-4 h-4 text-blue-200" />
-              Make a Difference
-            </span>
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight mb-5">
               Join us in building<br />
               <span className="text-blue-200">lasting change</span>
@@ -145,9 +141,6 @@ export default function GetInvolved() {
               transition={{ duration: 0.4, delay: i * 0.07 }}
               className="text-center"
             >
-              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-2">
-                <stat.icon className="w-5 h-5 text-blue-600" />
-              </div>
               <CountUp value={stat.value} className="text-3xl font-black text-blue-600 leading-none mb-1 block" />
               <div className="text-xs text-gray-500 font-medium">{stat.label}</div>
             </motion.div>
@@ -164,9 +157,6 @@ export default function GetInvolved() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-wide mb-4">
-              Volunteer
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Give your time</h2>
             <p className="text-gray-600 max-w-xl mx-auto">
               Even a few hours a month can change a teen's trajectory. Pick the role that fits your life.
@@ -224,9 +214,6 @@ export default function GetInvolved() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-xs font-semibold uppercase tracking-wide mb-4">
-              Donate
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Fund the mission</h2>
             <p className="text-gray-600 max-w-xl mx-auto">
               All our programs are 100% free for teens. Your donation makes that possible.
@@ -274,9 +261,6 @@ export default function GetInvolved() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold uppercase tracking-wide mb-4">
-              Spread the Word
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Amplify our message</h2>
             <p className="text-gray-600 max-w-xl mx-auto">
               Sharing takes 30 seconds and can connect a struggling teen with the help they need.
@@ -294,9 +278,6 @@ export default function GetInvolved() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300 p-5 flex items-start gap-4"
               >
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${msg.gradient} flex items-center justify-center flex-shrink-0 shadow-sm`}>
-                  <Share2 className="w-5 h-5 text-white" />
-                </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{msg.platform}</p>
                   <p className="text-sm text-gray-700 leading-relaxed">{msg.text}</p>
@@ -309,7 +290,7 @@ export default function GetInvolved() {
                       : 'bg-white border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
                   }`}
                 >
-                  {copiedIdx === i ? '✓ Copied' : 'Copy'}
+                  {copiedIdx === i ? 'Copied!' : 'Copy'}
                 </button>
               </motion.div>
             ))}
@@ -327,10 +308,7 @@ export default function GetInvolved() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold uppercase tracking-wide mb-4">
-                Partner With Us
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 Schools & organizations, let's collaborate
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">

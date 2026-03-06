@@ -205,7 +205,7 @@ export default function StorySubmitForm() {
             onClick={() => setSelectedTopic(null)}
             className="text-blue-600 hover:text-blue-700 text-sm mb-6 transition-colors">
 
-              ← Back to topics
+              Back to topics
             </button>
 
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-blue-200">

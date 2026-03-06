@@ -200,11 +200,8 @@ export default function Partnerships() {
                 className={`group relative ${type.bg} rounded-2xl p-6 border ${type.border} hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden`}
               >
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${type.gradient}`} />
-                <div className="flex items-start justify-between mb-4">
+                <div className="mb-4">
                   <h3 className="text-lg font-black text-gray-900">{type.title}</h3>
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full flex-shrink-0 ml-3 ${type.tagColor}`}>
-                    {type.tag}
-                  </span>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">{type.description}</p>
               </motion.div>
