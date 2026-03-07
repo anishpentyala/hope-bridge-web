@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
+import SEOHead from '@/components/SEOHead';
 
 // kept for backward compat, replaced by PageBackground
 function PageBg() {
@@ -77,6 +78,11 @@ const teamMembers = [
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="About Us"
+        description="Meet the HopeBridge team — a group of Asian American high schoolers from the Seattle area building culturally informed mental health support for their peers."
+        path="/About"
+      />
       <PageBackground />
       <PageBg />
 

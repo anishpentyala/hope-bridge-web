@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import SEOHead from '@/components/SEOHead';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { Button } from '@/components/ui/button';
@@ -176,6 +177,11 @@ export default function StoryProject() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Story Project"
+        description="Read and share real stories from Asian American teens about mental health, cultural identity, family pressure, and finding support. HopeBridge's Story Project amplifies unheard voices."
+        path="/StoryProject"
+      />
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none z-0 opacity-70"

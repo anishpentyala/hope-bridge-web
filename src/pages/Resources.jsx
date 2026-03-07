@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 import {
   Phone, MessageSquare, Heart, Shield,
   ArrowRight, ExternalLink, AlertCircle
@@ -125,6 +126,11 @@ export default function Resources() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Mental Health Resources"
+        description="Curated crisis help, therapy resources, and self-care tools for Asian American teens — including hotlines, apps, and culturally informed support guides."
+        path="/Resources"
+      />
       <PageBackground />
 
       {/* Hero */}

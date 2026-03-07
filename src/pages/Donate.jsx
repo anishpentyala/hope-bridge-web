@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEOHead from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
 import { Heart, Users, GraduationCap, Building, ArrowRight, Check } from 'lucide-react';
 import StripePaymentForm from '@/components/donate/StripePaymentForm';
@@ -40,6 +41,11 @@ const allocation = [
 export default function DonatePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Donate"
+        description="Support HopeBridge's free mental health programs for Asian American teens. Your donation funds peer mentorship, school workshops, and community events in the Seattle area."
+        path="/Donate"
+      />
       <PageBackground />
       {/* Lightweight static background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">

@@ -1,10 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Mail } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <SEOHead
+        title="Privacy Policy"
+        description="HopeBridge's privacy policy explains how we collect, use, and protect your personal information."
+        path="/PrivacyPolicy"
+        noIndex={true}
+      />
       <section className="pt-16 pb-20 px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <motion.div

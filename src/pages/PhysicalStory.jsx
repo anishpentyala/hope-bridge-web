@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Loader2, CheckCircle2, AlertCircle, Sparkles, Heart, Users, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 export default function PhysicalStory() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -69,6 +70,11 @@ export default function PhysicalStory() {
 
   return (
     <div className="min-h-screen bg-black">
+      <SEOHead
+        title="Share Your Story"
+        description="Upload a photo or drawing and share your mental health story with the HopeBridge community. Your voice matters and can inspire other Asian American teens."
+        path="/PhysicalStory"
+      />
       {/* Hero Section */}
       <section className="relative pt-16 pb-20 px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-black">
         {/* Animated background elements */}

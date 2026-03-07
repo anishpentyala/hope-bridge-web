@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -145,6 +146,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-50 relative overflow-hidden">
+      <SEOHead
+        title="Contact Us"
+        description="Get in touch with HopeBridge. We welcome teens, parents, schools, and community partners who want to learn more or get involved with our mental health programs."
+        path="/Contact"
+      />
       {/* Lightweight static background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute -top-16 -left-16 w-72 h-72 bg-blue-100/50 rounded-full blur-2xl" />

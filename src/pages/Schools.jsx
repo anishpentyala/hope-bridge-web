@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 import { Users, BookOpen, Heart, CheckCircle, Send, ArrowRight } from 'lucide-react';
 
 const benefits = [
@@ -112,6 +113,11 @@ export default function Schools() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-50 via-blue-50 to-sky-50">
+      <SEOHead
+        title="School Partnerships"
+        description="Partner your school with HopeBridge to bring free mental health workshops and peer support programs to Asian American students in the greater Seattle area."
+        path="/Schools"
+      />
 
       {/* Hero */}
       <section className="pt-16 pb-16 px-6 lg:px-8">

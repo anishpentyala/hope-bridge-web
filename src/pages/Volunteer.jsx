@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import SEOHead from '@/components/SEOHead';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Heart, Users, Calendar, BookOpen, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -76,6 +77,11 @@ export default function Volunteer() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50/30 to-white relative overflow-hidden">
+      <SEOHead
+        title="Volunteer"
+        description="Become a HopeBridge volunteer. High school and college students can apply to become peer mentors, event organizers, or workshop facilitators in the Seattle area."
+        path="/Volunteer"
+      />
       <PageBackground />
 
       {/* Hero */}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 import CountUp from '../components/CountUp';
 import {
   Heart, Users, Megaphone, DollarSign,
@@ -107,6 +108,11 @@ export default function GetInvolved() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Get Involved"
+        description="Volunteer, partner, or spread the word. Join HopeBridge's mission to improve mental health outcomes for Asian American teens through community action."
+        path="/GetInvolved"
+      />
       <PageBackground />
 
       {/* ── HERO ── */}

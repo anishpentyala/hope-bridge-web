@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 import {
   Phone, MessageCircle, Globe, Heart, Users, Shield,
   ExternalLink, ChevronRight, AlertCircle, BookOpen,
@@ -197,6 +198,11 @@ export default function GetSupport() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Get Support"
+        description="Find mental health resources, peer mentors, and support tailored for Asian American teens. HopeBridge connects you with free, culturally informed help in the Seattle area."
+        path="/GetSupport"
+      />
       <PageBackground />
 
       {/* ── HERO ── */}

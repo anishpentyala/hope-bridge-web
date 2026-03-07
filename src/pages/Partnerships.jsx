@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import SEOHead from '@/components/SEOHead';
 import {
   GraduationCap, Building2, HeartHandshake, Stethoscope,
   Send, ArrowRight
@@ -137,6 +138,11 @@ export default function Partnerships() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Partner With Us"
+        description="HopeBridge welcomes partnerships with schools, healthcare providers, and community organizations to expand culturally informed mental health support for Asian American teens."
+        path="/Partnerships"
+      />
       <PageBackground />
 
       {/* Hero */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Heart, BookOpen, Compass, Home as HomeIcon, ArrowRight } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
+import SEOHead from '@/components/SEOHead';
 // AnimatedBackground removed, page already has rich visual sections; the blobs were causing GPU lag
 
 // Animated counter component
@@ -82,6 +83,11 @@ export default function Mission() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Our Mission"
+        description="HopeBridge's mission is to bridge the gap in mental health support for Asian American teens by addressing cultural stigma, academic pressure, and family disconnect."
+        path="/Mission"
+      />
       <PageBackground />
 
       {/* ── HERO ── */}

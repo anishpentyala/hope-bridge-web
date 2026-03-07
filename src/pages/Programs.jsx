@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
 import { Link } from 'react-router-dom';
+import SEOHead from '@/components/SEOHead';
 import { createPageUrl } from '../utils';
 
 const programs = [
@@ -63,6 +64,11 @@ const pastEvents = [
 export default function Programs() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50/30 relative overflow-hidden">
+      <SEOHead
+        title="Programs"
+        description="HopeBridge programs include peer mentorship circles, school workshops, and community events — all free and designed for Asian American teens in the greater Seattle area."
+        path="/Programs"
+      />
       <PageBackground />
       {/* Static bg accent */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
