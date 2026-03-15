@@ -168,14 +168,6 @@ export default function Schools() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <div className="rounded-2xl overflow-hidden shadow-md">
-                <img
-                  src="/images/activities/classroom-activity.jpg"
-                  alt="Students participating in a HopeBridge classroom workshop"
-                  className="w-full h-64 object-cover"
-                  loading="lazy"
-                />
-              </div>
               <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
                 <h3 className="text-2xl font-semibold text-slate-900 mb-4">
                   Always Free for Students
