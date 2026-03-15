@@ -1,31 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Calendar, Building, BookMarked, ArrowUpRight } from 'lucide-react';
 
 const programs = [
   {
-    icon: Calendar,
     title: "Workshops & Discussions",
-    description: "Interactive sessions on topics like managing academic stress, having difficult conversations with parents, and building emotional resilience.",
-    color: "from-sky-600 via-blue-500 to-cyan-500"
+    description: "Interactive sessions on topics like managing academic stress, having difficult conversations with parents, and building emotional resilience."
   },
   {
-    icon: Building,
     title: "School Partnerships",
-    description: "We bring mental health awareness and support directly to schools through assemblies, counselor training, and student-led initiatives.",
-    color: "from-blue-700 via-blue-600 to-blue-500"
+    description: "We bring mental health awareness and support directly to schools through assemblies, counselor training, and student-led initiatives."
   },
   {
-    icon: BookMarked,
     title: "Resource Hub",
-    description: "Curated resources for teens, parents, and educators, including guides on having mental health conversations across cultural contexts.",
-    color: "from-sky-500 via-blue-400 to-cyan-400"
+    description: "Curated resources for teens, parents, and educators, including guides on having mental health conversations across cultural contexts."
   }
 ];
 
 export default function Programs() {
   return (
-    <section id="programs" className="py-24 lg:py-32 bg-gradient-to-b from-cyan-100 via-teal-50 to-sky-100">
+    <section id="programs" className="py-24 lg:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -38,7 +31,7 @@ export default function Programs() {
             What We Do
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold text-slate-900 leading-tight">
-            Programs designed with <span className="font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">understanding</span>
+            Programs designed with <span className="text-blue-700">understanding</span>
           </h2>
           <p className="mt-6 text-lg text-slate-600">
             Every initiative is built with cultural context in mind, because support 
@@ -56,21 +49,13 @@ export default function Programs() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group relative"
             >
-              <div className="relative h-full p-8 rounded-2xl bg-white border border-blue-100/40 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-100/30 transition-all duration-300 overflow-hidden">
-                {/* Gradient accent */}
-                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${program.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${program.color} flex items-center justify-center shadow-lg`}>
-                    <program.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-blue-600 transition-colors" />
-                </div>
-
+              <div className="relative h-full p-8 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-blue-700 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-8 h-0.5 bg-blue-600 mb-6" />
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">
                   {program.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-slate-500 leading-relaxed">
                   {program.description}
                 </p>
               </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../../utils';
 import { motion } from 'framer-motion';
-import { BookOpen, Users, Lightbulb } from 'lucide-react';
 import CountUp from '../CountUp';
 
 export default function StorySection() {
@@ -15,7 +14,6 @@ export default function StorySection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <BookOpen className="w-16 h-16 mx-auto mb-6 text-blue-100" />
           <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
             Share Your Story
           </h2>
@@ -25,25 +23,22 @@ export default function StorySection() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <BookOpen className="w-6 h-6 mx-auto mb-2 text-blue-200" />
+            <div className="bg-white/10 rounded-xl p-5 border border-white/20">
               <CountUp value="200+" className="text-2xl font-bold block" />
-              <div className="text-xs text-blue-100">Stories shared</div>
+              <div className="text-xs text-blue-100 mt-1">Stories shared</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <Users className="w-6 h-6 mx-auto mb-2 text-blue-200" />
+            <div className="bg-white/10 rounded-xl p-5 border border-white/20">
               <CountUp value="100+" className="text-2xl font-bold block" />
-              <div className="text-xs text-blue-100">Teens connected</div>
+              <div className="text-xs text-blue-100 mt-1">Teens connected</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <Lightbulb className="w-6 h-6 mx-auto mb-2 text-blue-200" />
+            <div className="bg-white/10 rounded-xl p-5 border border-white/20">
               <CountUp value="100%" className="text-2xl font-bold block" />
-              <div className="text-xs text-blue-100">Safe & secure</div>
+              <div className="text-xs text-blue-100 mt-1">Safe & secure</div>
             </div>
           </div>
 
           <Link to={createPageUrl('StoryProject')}>
-            <a className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-full font-semibold text-lg hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl hover:scale-105 duration-300">
+            <a className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-700 rounded-lg font-semibold text-base hover:bg-blue-50 transition-colors duration-200 shadow-md">
               Explore Stories
             </a>
           </Link>
