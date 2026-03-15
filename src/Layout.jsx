@@ -246,7 +246,7 @@ export default function Layout({ children, currentPageName }) {
           --color-text-body: #334155;
         }
 
-        html { scroll-behavior: smooth; overflow-x: hidden; }
+        html { scroll-behavior: smooth; } body { overflow-x: hidden; }
 
         body {
           background-color: #f0f6ff;
@@ -351,7 +351,7 @@ export default function Layout({ children, currentPageName }) {
       `}</style>
 
       {/* ── Sticky top bar: crisis banner + navbar as one unit ── */}
-      <div className="sticky top-0 z-50 flex flex-col">
+      <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
         <CrisisBanner />
 
         <header
@@ -559,7 +559,7 @@ export default function Layout({ children, currentPageName }) {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1">
+      <main className="flex-1 pt-16">
         {children}
       </main>
 
