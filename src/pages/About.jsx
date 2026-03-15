@@ -113,6 +113,14 @@ export default function About() {
           >
             <div className="bg-white rounded-3xl p-10 shadow-lg border border-blue-100">
               <h2 className="text-3xl font-bold text-blue-600 mb-6">Our Story</h2>
+              <div className="mb-8 rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src="/images/activities/brochure-outreach.jpg"
+                  alt="HopeBridge members sharing mental health brochures during outreach"
+                  className="w-full h-64 sm:h-80 object-cover"
+                  loading="lazy"
+                />
+              </div>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p className="text-lg">
                   Hope Bridge started with something simple: conversations.

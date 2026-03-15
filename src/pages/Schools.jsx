@@ -166,24 +166,34 @@ export default function Schools() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100"
+              className="space-y-6"
             >
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
-                Always Free for Students
-              </h3>
-              <div className="space-y-4 text-slate-600 leading-relaxed">
-                <p>
-                  HopeBridge brings culturally informed mental health programming directly to schools,
-                  making support accessible to Asian American students where they spend their days.
-                </p>
-                <p>
-                  Our programs address the unique pressures these students face, from academic expectations
-                  to identity struggles, in ways traditional counseling often can't.
-                </p>
-                <p>
-                  All programming is completely free for schools and students, removing financial barriers
-                  to mental health support.
-                </p>
+              <div className="rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src="/images/activities/classroom-activity.jpg"
+                  alt="Students participating in a HopeBridge classroom workshop"
+                  className="w-full h-64 object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+                <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                  Always Free for Students
+                </h3>
+                <div className="space-y-4 text-slate-600 leading-relaxed">
+                  <p>
+                    HopeBridge brings culturally informed mental health programming directly to schools,
+                    making support accessible to Asian American students where they spend their days.
+                  </p>
+                  <p>
+                    Our programs address the unique pressures these students face, from academic expectations
+                    to identity struggles, in ways traditional counseling often can't.
+                  </p>
+                  <p>
+                    All programming is completely free for schools and students, removing financial barriers
+                    to mental health support.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>

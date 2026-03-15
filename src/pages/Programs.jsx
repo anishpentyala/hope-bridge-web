@@ -35,28 +35,28 @@ const programs = [
   },
 ];
 
-// Previous events data, add real photos/details as available
+// Previous events data
 const pastEvents = [
   {
     title: 'Hope Bridge Launch Event',
-    date: 'Coming soon',
+    date: 'Spring 2025',
     location: 'Sammamish, WA',
     description: 'The founding launch of HopeBridge Community Services, bringing together teens, families, and community members to kick off our mission.',
-    placeholder: true,
+    image: '/images/activities/launch-event.jpg',
   },
   {
     title: 'Community Awareness Workshop',
-    date: 'Coming soon',
+    date: 'Spring 2025',
     location: 'Sammamish, WA',
     description: 'An interactive workshop exploring identity, family expectations, and mental wellness through a culturally informed lens.',
-    placeholder: true,
+    image: '/images/activities/workshop-presentation.jpg',
   },
   {
     title: 'Story Sharing Night',
-    date: 'Coming soon',
+    date: 'Spring 2025',
     location: 'Sammamish, WA',
     description: 'Teens gathered to share experiences around family pressures, cultural identity, and academic stress in a safe, supportive environment.',
-    placeholder: true,
+    image: '/images/activities/story-sharing-night.jpg',
   },
 ];
 
@@ -165,11 +165,22 @@ export default function Programs() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:bg-white/15 transition-all duration-300 hover:-translate-y-1"
               >
-                {/* Photo placeholder */}
-                <div className="relative w-full h-52 bg-white/10 flex flex-col items-center justify-center gap-2 border-b border-white/15">
-                  <ImageIcon className="w-10 h-10 text-white/40" />
-                  <p className="text-xs text-white/50 font-medium">Event Photo Coming Soon</p>
-                </div>
+                {/* Event photo */}
+                {event.image ? (
+                  <div className="relative w-full h-52 overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-full h-52 bg-white/10 flex flex-col items-center justify-center gap-2 border-b border-white/15">
+                    <ImageIcon className="w-10 h-10 text-white/40" />
+                    <p className="text-xs text-white/50 font-medium">Event Photo Coming Soon</p>
+                  </div>
+                )}
 
                 <div className="p-5">
                   <h3 className="text-base font-black text-white mb-1">{event.title}</h3>
