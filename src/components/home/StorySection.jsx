@@ -31,7 +31,7 @@ export default function StorySection() {
                 src="/images/community/community-brochures.jpg"
                 alt="Students holding HopeBridge brochures on Asian teen mental health"
                 loading="lazy"
-                className="w-full h-56 object-cover"
+                className="w-full h-[28rem] object-cover"
               />
             </div>
             <div className="space-y-8">
