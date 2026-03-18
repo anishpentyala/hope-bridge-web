@@ -26,6 +26,14 @@ export default function StorySection() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}>
+            <div className="rounded-2xl overflow-hidden shadow-xl mb-8">
+              <img
+                src="/images/community/community-brochures.jpg"
+                alt="Students holding HopeBridge brochures on Asian teen mental health"
+                loading="lazy"
+                className="w-full h-56 object-cover"
+              />
+            </div>
             <div className="space-y-8">
               <div className="border-l-2 border-white/40 pl-6">
                 <p className="text-3xl font-black text-white mb-1">200+</p>

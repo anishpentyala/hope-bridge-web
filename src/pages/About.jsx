@@ -98,6 +98,41 @@ export default function About() {
               <p className="text-lg">
                 As Asian American teens, we noticed that many of us were dealing with the same things but rarely talking about them. The pressure to do well in school. The feeling of balancing two cultures. The gap that can sometimes exist between what teens are experiencing and what families understand.
               </p>
+            </div>
+
+            {/* Community photos within Our Story */}
+            <div className="my-10 grid grid-cols-2 gap-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="rounded-xl overflow-hidden shadow-md"
+              >
+                <img
+                  src="/images/community/community-classroom.jpg"
+                  alt="A full classroom of students engaged in a HopeBridge awareness session"
+                  loading="lazy"
+                  className="w-full h-48 object-cover"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="rounded-xl overflow-hidden shadow-md"
+              >
+                <img
+                  src="/images/community/community-workshop.jpg"
+                  alt="Teens participating in a writing workshop"
+                  loading="lazy"
+                  className="w-full h-48 object-cover"
+                />
+              </motion.div>
+            </div>
+
+            <div className="space-y-4 text-gray-700 leading-relaxed">
               <p className="text-lg">
                 These pressures often come from good intentions. Many parents want stability and opportunity for their children, especially if they sacrificed a lot to get here. At the same time, teens are trying to figure out who they are, what success means to them, and how to handle the stress that comes with it.
               </p>

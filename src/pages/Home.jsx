@@ -9,6 +9,7 @@ import StorySection from '@/components/home/StorySection.jsx';
 import Programs from '@/components/home/Programs';
 import Partnerships from '@/components/home/Partnerships';
 import GetInvolved from '@/components/home/GetInvolved';
+import CommunityGallery from '@/components/home/CommunityGallery';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Programs />
       <StorySection />
       <Impact />
+      <CommunityGallery />
       <GetInvolved />
       <Partnerships />
       <CommunitySurvey />
