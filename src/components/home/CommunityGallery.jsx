@@ -23,7 +23,7 @@ const photos = [
     span: 'col-span-2',
   },
   {
-    src: '/images/community/community-poster-2.jpg',
+    src: '/images/community/story-sharing-night.jpeg',
     alt: 'Three HopeBridge team members standing proudly with their community project display board',
     span: '',
   },
