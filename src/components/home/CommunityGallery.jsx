@@ -18,7 +18,7 @@ const photos = [
     span: '',
   },
   {
-    src: '/images/community/community-classroom.jpg',
+    src: '/images/community/launch-event.jpeg',
     alt: 'A full classroom of students engaged in a HopeBridge community awareness session',
     span: 'col-span-2',
   },

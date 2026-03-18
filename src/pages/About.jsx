@@ -110,7 +110,7 @@ export default function About() {
                 className="rounded-xl overflow-hidden shadow-md"
               >
                 <img
-                  src="/images/community/community-classroom.jpg"
+                  src="/images/community/launch-event.jpeg"
                   alt="A full classroom of students engaged in a HopeBridge awareness session"
                   loading="lazy"
                   className="w-full h-48 object-cover"
