@@ -11,6 +11,7 @@ const photos = [
     src: '/images/community/community-brochures.jpg',
     alt: 'Students holding HopeBridge brochures on Asian teen mental health awareness in the classroom',
     span: '',
+    objectPosition: 'top',
   },
   {
     src: '/images/community/community-workshop.jpg',
@@ -66,6 +67,7 @@ export default function CommunityGallery() {
                 alt={photo.alt}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                style={photo.objectPosition ? { objectPosition: photo.objectPosition } : undefined}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
