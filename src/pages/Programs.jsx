@@ -223,6 +223,51 @@ export default function Programs() {
         </div>
       </section>
 
+      {/* ── PHOTO GALLERY ── */}
+      <section className="py-20 px-6 lg:px-8 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4">
+              Our Community in Action
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Snapshots from our workshops, story sharing sessions, and community events.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { src: '/images/events/writing-workshop-1.jpg', alt: 'Student writing during a workshop activity' },
+              { src: '/images/events/group-discussion.jpg', alt: 'Students collaborating during a group discussion' },
+              { src: '/images/events/presentation-prompts.jpg', alt: 'Workshop presentation with writing prompts on screen' },
+              { src: '/images/events/writing-workshop-2.jpg', alt: 'Student focused on a writing exercise' },
+              { src: '/images/events/story-wall.jpg', alt: 'Student pinning written stories to a shared story wall' },
+            ].map((photo, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={`relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${index === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}`}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-64 object-cover"
+                  loading="lazy"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="py-20 px-6 lg:px-8 bg-blue-50">
         <div className="max-w-3xl mx-auto text-center">
