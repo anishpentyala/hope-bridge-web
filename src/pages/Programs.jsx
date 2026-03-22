@@ -160,24 +160,30 @@ export default function Programs() {
             </div>
           </motion.div>
 
-          {/* Photo grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+          {/* Photo grid - 2 rows of 6 */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {[
-              '/images/community/dropin-1.jpg',
-              '/images/community/dropin-2.jpg',
-              '/images/community/dropin-3.jpg',
-              '/images/community/dropin-4.jpg',
-              '/images/community/dropin-5.jpg',
-              '/images/community/dropin-6.jpg',
+              '/images/community/dropin-01.jpg',
+              '/images/community/dropin-02.jpg',
+              '/images/community/dropin-03.jpg',
+              '/images/community/dropin-04.jpg',
+              '/images/community/dropin-05.jpg',
+              '/images/community/dropin-06.jpg',
+              '/images/community/dropin-07.jpg',
+              '/images/community/dropin-08.jpg',
+              '/images/community/dropin-09.jpg',
+              '/images/community/dropin-10.jpg',
+              '/images/community/dropin-11.jpg',
+              '/images/community/dropin-12.jpg',
             ].map((src, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
+                transition={{ duration: 0.4, delay: index * 0.04 }}
               >
-                <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300">
+                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300">
                   <img
                     src={src}
                     alt={`Club Drop-In session ${index + 1}`}
