@@ -160,31 +160,31 @@ export default function Programs() {
             </div>
           </motion.div>
 
-          {/* Photo grid - 4x2 with blank placeholders */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* Photo grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
             {[
-              'Eastlake High School',
-              'Issaquah High School',
-              'Redmond High School',
-              'Sammamish Community Club',
-              'Key Club Session 1',
-              'Key Club Session 2',
-              'Group Discussion',
-              'Student Q&A',
-            ].map((label, index) => (
+              '/images/community/dropin-1.jpg',
+              '/images/community/dropin-2.jpg',
+              '/images/community/dropin-3.jpg',
+              '/images/community/dropin-4.jpg',
+              '/images/community/dropin-5.jpg',
+              '/images/community/dropin-6.jpg',
+            ].map((src, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
-                className="flex flex-col"
               >
-                <div className="relative w-full h-48 bg-white/10 rounded-2xl overflow-hidden border border-white/20 flex flex-col items-center justify-center gap-2 hover:bg-white/15 transition-all duration-300">
-                  <ImageIcon className="w-8 h-8 text-white/30" />
-                  <p className="text-xs text-white/40 font-medium">Photo Coming Soon</p>
+                <div className="relative w-full h-56 rounded-2xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300">
+                  <img
+                    src={src}
+                    alt={`Club Drop-In session ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-                <p className="text-center text-sm text-white/60 mt-2 font-medium">{label}</p>
               </motion.div>
             ))}
           </div>
