@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
   ArrowRight,
-  Calendar, MapPin, Image as ImageIcon,
+  Calendar, MapPin, Image as ImageIcon, Users,
 } from 'lucide-react';
 import PageBackground from '../components/PageBackground';
 import { Link } from 'react-router-dom';
@@ -123,6 +123,68 @@ export default function Programs() {
                     View Resources <ArrowRight className="w-4 h-4" />
                   </Link>
                 )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLUB DROP-INS ── */}
+      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 relative z-10 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Header area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Users className="w-8 h-8 text-blue-300" />
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-blue-500/30 text-blue-200 border border-blue-400/30">
+                Community Outreach
+              </span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6">
+              Club Drop-Ins
+            </h2>
+            <div className="max-w-3xl">
+              <p className="text-white/80 text-lg leading-relaxed mb-4">
+                We hosted over <span className="text-blue-300 font-bold">5 interactive drop-in sessions</span> at Key Clubs and student organizations across four Eastside high schools — Eastlake, Issaquah, Redmond, and through the Sammamish Community Club. Each session brought HopeBridge directly into club meetings where we led discussions on our three core pillars: <span className="text-blue-300 font-semibold">cultural identity</span>, <span className="text-blue-300 font-semibold">academic pressure</span>, and <span className="text-blue-300 font-semibold">family disconnect</span>.
+              </p>
+              <p className="text-white/70 text-base leading-relaxed">
+                Students had the chance to hear from teen peers who understand the unique challenges of growing up between two cultures, ask questions in a judgment-free space, and contribute their own stories to our ongoing Story Project. These drop-ins helped us expand from a single-school presence to a multi-school network across the Eastside, building lasting partnerships with Key Club chapters and connecting with students who may not have otherwise encountered mental health resources designed specifically for Asian American teens.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Photo grid - 4x2 with blank placeholders */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              'Eastlake High School',
+              'Issaquah High School',
+              'Redmond High School',
+              'Sammamish Community Club',
+              'Key Club Session 1',
+              'Key Club Session 2',
+              'Group Discussion',
+              'Student Q&A',
+            ].map((label, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="flex flex-col"
+              >
+                <div className="relative w-full h-48 bg-white/10 rounded-2xl overflow-hidden border border-white/20 flex flex-col items-center justify-center gap-2 hover:bg-white/15 transition-all duration-300">
+                  <ImageIcon className="w-8 h-8 text-white/30" />
+                  <p className="text-xs text-white/40 font-medium">Photo Coming Soon</p>
+                </div>
+                <p className="text-center text-sm text-white/60 mt-2 font-medium">{label}</p>
               </motion.div>
             ))}
           </div>
