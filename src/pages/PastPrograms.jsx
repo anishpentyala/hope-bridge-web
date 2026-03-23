@@ -41,7 +41,7 @@ export default function PastPrograms() {
               </p>
             </div>
           </motion.div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {['/images/community/dropin-01.jpg','/images/community/dropin-02.jpg','/images/community/dropin-03.jpg','/images/community/dropin-07.jpg','/images/community/dropin-04.jpg','/images/community/dropin-08.jpg','/images/community/dropin-09.jpg','/images/community/dropin-11.jpg','/images/community/dropin-06.jpg'].map((src, index) => (
               <motion.div key={index} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.04 }}>
                 <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300">
@@ -69,7 +69,7 @@ export default function PastPrograms() {
               </p>
             </div>
           </motion.div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {['/images/community/booth-01.jpg','/images/community/booth-02.jpg','/images/community/booth-03.jpg','/images/community/booth-04.jpg','/images/community/booth-05.jpg',null].map((src, index) => (
               <motion.div key={index} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.04 }}>
                 {src ? (
