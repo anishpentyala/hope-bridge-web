@@ -216,16 +216,13 @@ export default function Programs() {
               Mental Health Awareness Booths
             </h2>
             <div className="max-w-3xl">
-              <p className="text-white/80 text-lg leading-relaxed mb-4">
-                We set up <span className="text-blue-300 font-bold">2 Mental Health Awareness Booths</span> at Woodinville High School and at Skyline High School's Holiday Bazaar in December 2025. Each booth featured a community story wall where students could share experiences about cultural expectations, academic pressure, and social stress.
-              </p>
-              <p className="text-white/70 text-base leading-relaxed">
-                Visitors grabbed a lollipop, took our short survey on Asian teen mental health, and had the chance to donate to support future HopeBridge programs. These booths marked HopeBridge's first major in-person events and helped us collect real stories and data from the community while raising awareness about the unique mental health challenges facing Asian American teens.
+              <p className="text-white/80 text-lg leading-relaxed">
+                We set up <span className="text-blue-300 font-bold">2 Mental Health Awareness Booths</span> at Woodinville High School and at Skyline High School's Holiday Bazaar in December 2025. Each booth featured a community story wall, a short mental health survey, and lollipop giveaways to engage students and raise awareness about the challenges facing Asian American teens.
               </p>
             </div>
           </motion.div>
 
-          {/* Photo grid - 3x3 */}
+          {/* Photo grid - 3x2 */}
           <div className="grid grid-cols-3 gap-3">
             {[
               '/images/community/booth-01.jpg',
@@ -233,10 +230,7 @@ export default function Programs() {
               '/images/community/booth-03.jpg',
               '/images/community/booth-04.jpg',
               '/images/community/booth-05.jpg',
-              '/images/community/booth-06.jpg',
-              '/images/community/booth-07.jpg',
-              '/images/community/booth-08.jpg',
-              '/images/community/booth-09.jpg',
+              null,
             ].map((src, index) => (
               <motion.div
                 key={index}
@@ -245,14 +239,21 @@ export default function Programs() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.04 }}
               >
-                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300">
-                  <img
-                    src={src}
-                    alt={`Mental Health Awareness Booth ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
+                {src ? (
+                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300">
+                    <img
+                      src={src}
+                      alt={`Mental Health Awareness Booth ${index + 1}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 bg-white/10 flex flex-col items-center justify-center gap-2">
+                    <ImageIcon className="w-8 h-8 text-white/30" />
+                    <p className="text-xs text-white/40 font-medium">Photo Coming Soon</p>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
