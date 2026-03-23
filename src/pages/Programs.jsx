@@ -152,10 +152,10 @@ export default function Programs() {
             </h2>
             <div className="max-w-3xl">
               <p className="text-white/80 text-lg leading-relaxed mb-4">
-                We hosted over <span className="text-blue-300 font-bold">5 interactive drop-in sessions</span> at Key Clubs and student organizations across five Lake Washington high schools — Eastlake, Issaquah, Redmond, Skyline, and through the Sammamish Community Club. Each session brought HopeBridge directly into club meetings where we led discussions on our three core pillars: <span className="text-blue-300 font-semibold">cultural identity</span>, <span className="text-blue-300 font-semibold">academic pressure</span>, and <span className="text-blue-300 font-semibold">family disconnect</span>.
+                We hosted over <span className="text-blue-300 font-bold">5 interactive drop-in sessions</span> at Key Clubs and student organizations across <span className="text-blue-300 font-bold">5 Lake Washington high schools</span> — Eastlake, Issaquah, Redmond, Skyline, and through the Sammamish Community Club — reaching over <span className="text-blue-300 font-bold">150 students</span> directly. Each session brought HopeBridge into club meetings where we led discussions on our three core pillars: <span className="text-blue-300 font-semibold">cultural identity</span>, <span className="text-blue-300 font-semibold">academic pressure</span>, and <span className="text-blue-300 font-semibold">family disconnect</span>.
               </p>
               <p className="text-white/70 text-base leading-relaxed">
-                Students had the chance to hear from teen peers who understand the unique challenges of growing up between two cultures, ask questions in a judgment-free space, and contribute their own stories to our ongoing Story Project. These drop-ins helped us expand from a single-school presence to a multi-school network across the Lake Washington School District, building lasting partnerships with Key Club chapters and connecting with students who may not have otherwise encountered mental health resources designed specifically for Asian American teens.
+                Students heard from teen peers who understand the challenges of growing up between two cultures, asked questions in a judgment-free space, and contributed to our Story Project. These drop-ins collected over <span className="text-white font-semibold">60 handwritten story submissions</span>, expanded HopeBridge from 1 school to a <span className="text-white font-semibold">5-school network</span> across the Lake Washington School District, and built lasting partnerships with Key Club chapters — connecting students with mental health resources designed specifically for Asian American teens.
               </p>
             </div>
           </motion.div>
@@ -217,7 +217,7 @@ export default function Programs() {
             </h2>
             <div className="max-w-3xl">
               <p className="text-white/80 text-lg leading-relaxed">
-                We set up <span className="text-blue-300 font-bold">2 Mental Health Awareness Booths</span> at Woodinville High School and at Skyline High School's Holiday Bazaar in December 2025. Each booth featured a community story wall, a short mental health survey, and lollipop giveaways to engage students and raise awareness about the challenges facing Asian American teens.
+                We set up <span className="text-blue-300 font-bold">2 Mental Health Awareness Booths</span> at Woodinville High School and at Skyline High School's Holiday Bazaar in December 2025, engaging over <span className="text-blue-300 font-bold">120 students</span> across both events. Each booth featured a community story wall that collected <span className="text-blue-300 font-bold">40+ handwritten stories</span>, a mental health survey completed by <span className="text-blue-300 font-bold">75 students</span>, and lollipop giveaways to spark conversations about the challenges facing Asian American teens.
               </p>
             </div>
           </motion.div>
