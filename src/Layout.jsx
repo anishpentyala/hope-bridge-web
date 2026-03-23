@@ -215,6 +215,7 @@ export default function Layout({ children, currentPageName }) {
       label: 'Programs', page: 'Programs',
       dropdown: [
         { label: 'All Programs', page: 'Programs' },
+        { label: 'Past Programs', page: 'PastPrograms' },
         { label: 'Resources', page: 'Resources' },
       ]
     },

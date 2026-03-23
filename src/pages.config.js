@@ -27,6 +27,7 @@ const StorySharing = lazy(() => import('./pages/StorySharing'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Volunteer = lazy(() => import('./pages/Volunteer'));
 const Partnerships = lazy(() => import('./pages/Partnerships'));
+const PastPrograms = lazy(() => import('./pages/PastPrograms'));
 
 
 export const PAGES = {
@@ -46,6 +47,7 @@ export const PAGES = {
     "PrivacyPolicy": PrivacyPolicy,
     "Volunteer": Volunteer,
     "Partnerships": Partnerships,
+    "PastPrograms": PastPrograms,
 }
 
 export const pagesConfig = {
