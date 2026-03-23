@@ -129,8 +129,26 @@ export default function Programs() {
         </div>
       </section>
 
+      {/* ── PAST PROGRAMS ── */}
+      <section className="pt-24 pb-10 px-6 lg:px-8 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 relative z-10">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
+              Past Programs
+            </h2>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              A look back at the events and initiatives that have shaped our community.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── CLUB DROP-INS ── */}
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 relative z-10 overflow-hidden">
+      <section className="pt-10 pb-20 px-6 lg:px-8 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 relative z-10 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -196,7 +214,7 @@ export default function Programs() {
 
 
       {/* ── MENTAL HEALTH AWARENESS BOOTHS ── */}
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 relative z-10 overflow-hidden">
+      <section className="pt-10 pb-20 px-6 lg:px-8 bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 relative z-10 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
         <div className="max-w-6xl mx-auto relative z-10">
