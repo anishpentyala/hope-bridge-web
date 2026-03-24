@@ -37,7 +37,7 @@ export default function StoryCard({ story, onLike, isLiked }) {
   };
 
   const safeTopic = topicLabels[story.topic] ? story.topic : 'family_pressures';
-  const authorName = (story.author_name || 'Anonymous').trim() || 'Anonymous';
+  const authorName = 'Anonymous';
   const createdDate = story.created_date ? new Date(story.created_date) : new Date();
   const displayDate = Number.isNaN(createdDate.getTime()) ? new Date() : createdDate;
 
