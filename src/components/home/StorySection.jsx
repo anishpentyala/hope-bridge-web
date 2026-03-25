@@ -26,7 +26,7 @@ export default function StorySection() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}>
-            <div className="rounded-2xl overflow-hidden shadow-xl mb-8">
+            <div className="rounded-2xl overflow-hidden shadow-xl mb-8 bg-blue-800">
               <img
                 src="/images/community/team-storyboard.jpg"
                 alt="HopeBridge team members posing with the community story board"

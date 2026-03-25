@@ -107,7 +107,7 @@ export default function About() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="rounded-xl overflow-hidden shadow-md"
+                className="rounded-xl overflow-hidden shadow-md bg-blue-100"
               >
                 <img
                   src="/images/community/community-classroom.jpg"
@@ -121,7 +121,7 @@ export default function About() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="rounded-xl overflow-hidden shadow-md"
+                className="rounded-xl overflow-hidden shadow-md bg-blue-100"
               >
                 <img
                   src="/images/community/community-workshop.jpg"
@@ -195,7 +195,7 @@ function TeamMemberCard({ member, index }) {
           alt={member.name}
           loading="lazy"
           onError={() => setShowImage(false)}
-          className="w-full max-w-[260px] aspect-[4/5] object-cover rounded-xl mx-auto mb-5 shadow-md border border-blue-200"
+          className="w-full max-w-[260px] aspect-[4/5] object-cover rounded-xl mx-auto mb-5 shadow-md border border-blue-200 bg-blue-100"
         />
       ) : (
         <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.color} mx-auto mb-4 flex items-center justify-center`}>

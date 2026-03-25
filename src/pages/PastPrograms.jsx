@@ -44,7 +44,7 @@ export default function PastPrograms() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {['/images/community/dropin-01.jpg','/images/community/dropin-02.jpg','/images/community/dropin-03.jpg','/images/community/dropin-07.jpg','/images/community/dropin-04.jpg','/images/community/dropin-08.jpg','/images/community/dropin-09.jpg','/images/community/dropin-11.jpg','/images/community/dropin-06.jpg'].map((src, index) => (
               <div key={index}>
-                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300">
+                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300 bg-white/10">
                   <img src={src} alt={`Club Drop-In session ${index + 1}`} className="w-full h-full object-cover" />
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function PastPrograms() {
             {['/images/community/booth-01.jpg','/images/community/booth-02.jpg','/images/community/booth-03.jpg','/images/community/booth-04.jpg','/images/community/booth-05.jpg',null].map((src, index) => (
               <div key={index}>
                 {src ? (
-                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300">
+                  <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300 bg-white/10">
                     <img src={src} alt={`Mental Health Awareness Booth ${index + 1}`} className="w-full h-full object-cover" />
                   </div>
                 ) : (

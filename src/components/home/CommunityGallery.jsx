@@ -52,7 +52,7 @@ export default function CommunityGallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.04 }}
-              className="relative overflow-hidden rounded-2xl group aspect-[4/3]"
+              className="relative overflow-hidden rounded-2xl group aspect-[4/3] bg-blue-100"
             >
               <img
                 src={photo.src}
