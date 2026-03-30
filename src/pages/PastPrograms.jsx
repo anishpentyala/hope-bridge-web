@@ -88,6 +88,50 @@ export default function PastPrograms() {
         </div>
       </section>
 
+      {/* ── PAST PARTNERS ── */}
+      <section className="py-20 px-6 lg:px-8 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4">
+              Our Partners
+            </h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Schools and organizations we've worked with to bring mental health awareness to the Eastside community.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 items-center justify-items-center max-w-4xl mx-auto">
+            {[
+              { name: 'Skyline High School', src: '/images/partners/skyline.png' },
+              { name: 'Eastlake High School', src: '/images/partners/eastlake.png' },
+              { name: 'Woodinville High School', src: '/images/partners/woodinville.png' },
+              { name: 'Issaquah High School', src: '/images/partners/issaquah.png' },
+              { name: 'Redmond High School', src: '/images/partners/redmond.png' },
+              { name: 'Eastlake Indian Student Association', src: '/images/partners/eastlake-isa.png' },
+              { name: 'Sammamish Community Club', src: '/images/partners/Sammamish Community Club Eastlake.png' },
+            ].map((partner, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.07 }}
+                className="flex flex-col items-center gap-3 group"
+              >
+                <div className="w-full aspect-square rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex items-center justify-center p-4 overflow-hidden">
+                  <img src={partner.src} alt={partner.name} className="w-full h-full object-contain" loading="lazy" />
+                </div>
+                <p className="text-xs text-center text-gray-500 font-medium leading-tight px-1">{partner.name}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="py-20 px-6 lg:px-8 bg-blue-50">
         <div className="max-w-3xl mx-auto text-center">
