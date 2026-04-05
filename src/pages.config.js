@@ -28,6 +28,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Volunteer = lazy(() => import('./pages/Volunteer'));
 const Partnerships = lazy(() => import('./pages/Partnerships'));
 const PastPrograms = lazy(() => import('./pages/PastPrograms'));
+const DonateSuccess = lazy(() => import('./pages/DonateSuccess'));
 
 
 export const PAGES = {
@@ -48,6 +49,7 @@ export const PAGES = {
     "Volunteer": Volunteer,
     "Partnerships": Partnerships,
     "PastPrograms": PastPrograms,
+    "DonateSuccess": DonateSuccess,
 }
 
 export const pagesConfig = {

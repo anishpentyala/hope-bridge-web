@@ -31,8 +31,8 @@ export default async function handler(req, res) {
         },
       ],
       mode: 'payment',
-      success_url: `https://hopebridgeservices.org/donate?success=true&amount=${parsedAmount}`,
-      cancel_url: 'https://hopebridgeservices.org/donate',
+      success_url: `https://hopebridgeservices.org/DonateSuccess?amount=${parsedAmount}`,
+      cancel_url: 'https://hopebridgeservices.org/Donate',
     });
 
     res.status(200).json({ url: session.url });
