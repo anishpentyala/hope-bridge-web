@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, CheckCircle2 } from 'lucide-react';
-import { base44 } from '@/api/client';
 
 export default function StripePaymentForm() {
   const [selectedAmount, setSelectedAmount] = useState(25);
@@ -77,23 +76,21 @@ export default function StripePaymentForm() {
   };
 
   const createPaymentIntent = async () => {
-    // Check if running in iframe
-    if (window.self !== window.top) {
-      alert('Checkout is only available from the published app. Please open the app in a new tab.');
-      return;
-    }
-
     setIsCreatingIntent(true);
     try {
-      const { data } = await base44.functions.invoke('createCheckout', {
-        amount: selectedAmount
+      const res = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: selectedAmount }),
       });
 
-      const checkoutUrl = new URL(data.url);
-      checkoutUrl.searchParams.set('amount', selectedAmount.toString());
-      
-      // Redirect to Stripe checkout
-      window.location.href = checkoutUrl.toString();
+      const data = await res.json();
+
+      if (!res.ok || !data.url) {
+        throw new Error(data.error || 'Failed to create checkout');
+      }
+
+      window.location.href = data.url;
     } catch (error) {
       console.error('Error creating checkout:', error);
       alert('Unable to initialize payment. Please try again or contact us directly.');
