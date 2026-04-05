@@ -416,13 +416,9 @@ export default function StoryProject() {
 
           {/* Filters and All Stories */}
            <div>
-             <motion.h2
-               initial={{ opacity: 0, x: -20 }}
-               whileInView={{ opacity: 1, x: 0 }}
-               viewport={{ once: true }}
-               className="text-5xl lg:text-6xl font-black text-black mb-12">
+             <h2 className="text-5xl lg:text-6xl font-black text-black mb-12">
                Explore <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">Stories</span>
-             </motion.h2>
+             </h2>
             
             <StorySearchFilters stories={stories} onFiltersChange={setFilteredStories} />
             <StoryFilters selectedTopic={selectedTopic} onTopicChange={setSelectedTopic} />

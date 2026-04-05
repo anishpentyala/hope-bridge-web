@@ -42,14 +42,9 @@ export default function StoryCard({ story, onLike, isLiked }) {
   const displayDate = Number.isNaN(createdDate.getTime()) ? new Date() : createdDate;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, type: "spring" }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className={`relative overflow-hidden rounded-2xl border transition-all ${topicBg[safeTopic]} ${isHovered ? 'border-blue-400 shadow-xl' : 'border-blue-200'}`}>
 
       {/* Header */}
@@ -80,13 +75,13 @@ export default function StoryCard({ story, onLike, isLiked }) {
       <div className="relative px-6 py-5 space-y-4">
 
 
-        <div className="relative group">
-          <p className="text-gray-700 leading-relaxed line-clamp-4 break-words">{story.content}</p>
+        <div>
+          <p className="text-gray-700 leading-relaxed line-clamp-4 break-words mb-2">{story.content}</p>
           <button
             onClick={() => setShowFullText(true)}
-            className="absolute bottom-0 right-0 bg-white/90 hover:bg-blue-50 px-3 py-1 rounded-lg text-xs text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-all flex items-center gap-1 shadow-md">
+            className="bg-white hover:bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-lg text-xs text-blue-600 font-semibold transition-all flex items-center gap-1 shadow-sm">
             <Maximize2 className="w-3 h-3" />
-            Read Full Story
+            View Full Story
           </button>
         </div>
 
@@ -156,15 +151,13 @@ export default function StoryCard({ story, onLike, isLiked }) {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto cursor-auto shadow-2xl">
               
-              {/* Close Button - Top Right Fixed */}
-              <button
-                onClick={() => setShowFullText(false)}
-                className="absolute top-4 right-4 z-50 bg-gray-900 hover:bg-black text-white p-3 rounded-full transition-all shadow-xl">
-                <X className="w-6 h-6" />
-              </button>
-
               {/* Header */}
-              <div className="sticky top-0 bg-white border-b border-blue-100 p-6">
+              <div className="sticky top-0 bg-white border-b border-blue-100 p-6 relative">
+                <button
+                  onClick={() => setShowFullText(false)}
+                  className="absolute top-4 right-4 z-50 bg-gray-900 hover:bg-black text-white p-2 rounded-full transition-all shadow-xl">
+                  <X className="w-5 h-5" />
+                </button>
                 <div className="flex-1 min-w-0 pr-12">
                   <h3 className="text-2xl font-bold text-gray-900 mb-3 break-words">{story.title}</h3>
                   <div className="flex items-center gap-3">
@@ -215,6 +208,6 @@ export default function StoryCard({ story, onLike, isLiked }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }

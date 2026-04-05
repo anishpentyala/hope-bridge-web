@@ -123,24 +123,6 @@ export default function GetInvolved() {
         </div>
       </section>
 
-      {/* ── IMPACT STATS ── */}
-      <section className="py-10 px-6 lg:px-8 bg-blue-50 border-b border-blue-100">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
-          {impactStats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="text-center"
-            >
-              <CountUp value={stat.value} className="text-3xl font-black text-blue-600 leading-none mb-1 block" />
-              <div className="text-xs text-gray-500 font-medium">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* ── VOLUNTEER ── */}
       <section className="py-16 px-6 lg:px-8 bg-blue-50" id="volunteer">
         <div className="max-w-6xl mx-auto">

@@ -32,7 +32,7 @@ export default function Problem() {
               {statistics.map((stat, index) => (
                 <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
                   className="flex items-start gap-6">
-                  <span className="text-4xl lg:text-5xl font-black text-white leading-none flex-shrink-0 w-24">
+                  <span className="text-4xl lg:text-5xl font-black text-white leading-none flex-shrink-0 whitespace-nowrap">
                     {stat.number}
                   </span>
                   <div className="pt-1 border-t border-blue-600/50 flex-1">

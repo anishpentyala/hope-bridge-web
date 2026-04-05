@@ -22,18 +22,12 @@ export default function FeaturedStories({ stories, onLike, likedStories }) {
         </h2>
       </motion.div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {stories.map((story, index) => (
-          <motion.div
+        {stories.map((story) => (
+          <StoryCard
             key={story.id}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}>
-            <StoryCard
-              story={story}
-              onLike={onLike}
-              isLiked={likedStories.includes(story.id)} />
-          </motion.div>
+            story={story}
+            onLike={onLike}
+            isLiked={likedStories.includes(story.id)} />
         ))}
       </div>
     </div>
