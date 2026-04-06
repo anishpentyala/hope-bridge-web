@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, AlertCircle } from 'lucide-react';
+import { moderateStoryText } from '@/lib/contentModeration';
 
 const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL || '').replace(/\/+$/, '');
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -28,6 +29,7 @@ export default function CommentsSection({ storyId, commentsCount }) {
   const [newComment, setNewComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [moderationError, setModerationError] = useState('');
 
   // Load comments from Supabase on mount
   useEffect(() => {
@@ -48,8 +50,21 @@ export default function CommentsSection({ storyId, commentsCount }) {
     if (storyId) loadComments();
   }, [storyId]);
 
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+    if (moderationError) setModerationError('');
+  };
+
   const handleSubmitComment = async () => {
     if (!newComment.trim()) return;
+
+    // Run moderation check before submitting
+    const moderation = moderateStoryText({ title: '', content: newComment.trim() });
+    if (!moderation.isClean) {
+      setModerationError("Your comment couldn't be posted because it contains profanity or inappropriate language. Please keep the community respectful.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const data = await supaFetch('/story_comments', {
@@ -79,21 +94,36 @@ export default function CommentsSection({ storyId, commentsCount }) {
       className="px-6 py-4 bg-gray-50 border-t border-blue-100 space-y-4">
 
       {/* Comment Input */}
-      <div className="flex gap-2">
-        <Input
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Share your thoughts anonymously..."
-          maxLength={300}
-          className="text-gray-900 rounded-lg bg-white border-blue-200"
-        />
-        <Button
-          onClick={handleSubmitComment}
-          disabled={isSubmitting || !newComment.trim()}
-          size="icon"
-          className="bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50">
-          {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-        </Button>
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          <Input
+            value={newComment}
+            onChange={handleCommentChange}
+            onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSubmitComment()}
+            placeholder="Share your thoughts anonymously..."
+            maxLength={300}
+            className={`text-gray-900 rounded-lg bg-white ${moderationError ? 'border-red-400 focus-visible:ring-red-400' : 'border-blue-200'}`}
+          />
+          <Button
+            onClick={handleSubmitComment}
+            disabled={isSubmitting || !newComment.trim()}
+            size="icon"
+            className="bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50">
+            {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+          </Button>
+        </div>
+        <AnimatePresence>
+          {moderationError && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              className="flex items-start gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg">
+              <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-red-600">{moderationError}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Comments */}

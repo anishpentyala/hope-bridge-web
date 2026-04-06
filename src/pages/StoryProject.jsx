@@ -10,7 +10,7 @@ import FeaturedStories from '@/components/story/FeaturedStories';
 import StoryInsights from '@/components/story/StoryInsights';
 import StorySearchFilters from '@/components/story/StorySearchFilters';
 import BackgroundElements from '@/components/BackgroundElements';
-import { createLocalStory, listSupabaseStories, updateLocalStoryLikes, updateSupabaseStoryLikes } from '@/lib/localStories';
+import { createLocalStory, listSupabaseStories, updateLocalStoryLikes, updateSupabaseStoryLikes, deleteSupabaseStory } from '@/lib/localStories';
 import { moderateStoryText } from '@/lib/contentModeration';
 
 export default function StoryProject() {
@@ -26,6 +26,37 @@ export default function StoryProject() {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const [photoTopic, setPhotoTopic] = useState('');
+
+  // Secret admin mode - click "O" in "Your Voice" 3 times
+  const [isAdmin, setIsAdmin] = useState(() => sessionStorage.getItem('hb_admin') === 'true');
+  const [oClickCount, setOClickCount] = useState(0);
+  const oClickTimer = React.useRef(null);
+
+  const handleOClick = (e) => {
+    e.stopPropagation();
+    const newCount = oClickCount + 1;
+    setOClickCount(newCount);
+
+    // Reset click count after 2 seconds of no clicks
+    clearTimeout(oClickTimer.current);
+    oClickTimer.current = setTimeout(() => setOClickCount(0), 2000);
+
+    if (newCount >= 3) {
+      const newAdmin = !isAdmin;
+      setIsAdmin(newAdmin);
+      sessionStorage.setItem('hb_admin', String(newAdmin));
+      setOClickCount(0);
+      clearTimeout(oClickTimer.current);
+    }
+  };
+
+  const handleDeleteStory = async (storyId) => {
+    const success = await deleteSupabaseStory(storyId);
+    if (success) {
+      setStories((prev) => prev.filter((s) => s.id !== storyId));
+      setFilteredStories((prev) => prev.filter((s) => s.id !== storyId));
+    }
+  };
 
   // Load stories
   useEffect(() => {
@@ -210,11 +241,24 @@ export default function StoryProject() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-4xl sm:text-5xl lg:text-8xl font-black text-gray-900 leading-[1.05] mb-10 tracking-tight">
-              Your Voice,{' '}
+              Y<span
+                onClick={handleOClick}
+                className="cursor-default select-none"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >o</span>ur Voice,{' '}
               <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 bg-clip-text text-transparent">
                 Your Story
               </span>
             </motion.h1>
+
+            {isAdmin && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 border border-red-300 text-red-700 text-sm font-semibold mb-4">
+                Admin Mode Active
+              </motion.div>
+            )}
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -410,7 +454,9 @@ export default function StoryProject() {
           <FeaturedStories
             stories={featuredStories}
             onLike={handleLike}
-            likedStories={likedStories} />
+            likedStories={likedStories}
+            isAdmin={isAdmin}
+            onDelete={handleDeleteStory} />
 
           }
 
@@ -434,7 +480,9 @@ export default function StoryProject() {
                 key={story.id}
                 story={story}
                 onLike={handleLike}
-                isLiked={likedStories.includes(story.id)} />
+                isLiked={likedStories.includes(story.id)}
+                isAdmin={isAdmin}
+                onDelete={handleDeleteStory} />
 
               )}
               </div> :

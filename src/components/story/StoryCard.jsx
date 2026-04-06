@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, MessageCircle, Calendar, Sparkles, X, Maximize2 } from 'lucide-react';
+import { Heart, MessageCircle, Calendar, Sparkles, X, Maximize2, Check, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -19,10 +19,11 @@ const topicLabels = {
   family_pressures: 'Family Pressures'
 };
 
-export default function StoryCard({ story, onLike, isLiked }) {
+export default function StoryCard({ story, onLike, isLiked, isAdmin, onDelete }) {
   const [showComments, setShowComments] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const topicGradients = {
     cultural_identity: 'from-blue-600 to-blue-500',
@@ -46,6 +47,51 @@ export default function StoryCard({ story, onLike, isLiked }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`relative overflow-hidden rounded-2xl border transition-all ${topicBg[safeTopic]} ${isHovered ? 'border-blue-400 shadow-xl' : 'border-blue-200'}`}>
+
+      {/* Admin moderation buttons */}
+      {isAdmin && (
+        <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+          {showDeleteConfirm ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex items-center gap-1.5 bg-white rounded-full shadow-lg border border-gray-200 px-2 py-1">
+              <span className="text-xs text-gray-600 font-medium px-1">Delete?</span>
+              <button
+                onClick={() => { onDelete?.(story.id); setShowDeleteConfirm(false); }}
+                className="w-7 h-7 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition-colors"
+                title="Confirm delete">
+                <Check className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className="w-7 h-7 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 flex items-center justify-center transition-colors"
+                title="Cancel">
+                <X className="w-4 h-4" />
+              </button>
+            </motion.div>
+          ) : (
+            <>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setShowDeleteConfirm(false)}
+                className="w-8 h-8 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center shadow-md transition-colors"
+                title="Approve / Keep post">
+                <Check className="w-4 h-4" />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setShowDeleteConfirm(true)}
+                className="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow-md transition-colors"
+                title="Delete post">
+                <X className="w-4 h-4 stroke-[3]" />
+              </motion.button>
+            </>
+          )}
+        </div>
+      )}
 
       {/* Header */}
       <div className="relative p-6 border-b border-blue-100">
