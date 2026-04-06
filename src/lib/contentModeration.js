@@ -1,17 +1,35 @@
 const BANNED_TERMS = [
-  'fuck', 'fucking', 'fucker',
-  'shit', 'shitty',
-  'bitch',
-  'asshole',
-  'motherfucker',
-  'cunt',
-  'nigger',
-  'faggot',
-  'slut',
-  'whore',
-  'dick',
-  'pussy',
-  'bastard'
+  // F-word variants
+  'fuck', 'fucking', 'fucker', 'fucked', 'fucks', 'fuk', 'fck', 'f u c k',
+  // S-word variants
+  'shit', 'shitty', 'shitting', 'shits', 'sht',
+  // B-words
+  'bitch', 'bitches', 'bitching', 'biatch',
+  'bastard', 'bastards',
+  // A-words
+  'asshole', 'assholes', 'ass', 'asses',
+  // C-words
+  'cunt', 'cunts',
+  // D-words
+  'dick', 'dicks', 'dickhead',
+  // P-words
+  'pussy', 'pussies',
+  // Slurs
+  'nigger', 'nigga', 'niggas', 'n i g g e r',
+  'faggot', 'faggots', 'fag', 'fags',
+  'retard', 'retarded', 'retards',
+  'spic', 'spics',
+  'kike', 'kikes',
+  'chink', 'chinks',
+  'wetback', 'wetbacks',
+  // Sexual
+  'slut', 'sluts',
+  'whore', 'whores',
+  'motherfucker', 'mf',
+  // Violence/threats
+  'kill yourself', 'kys',
+  'go die',
+  'kill you',
 ];
 
 const LEET_MAP = {
@@ -37,12 +55,17 @@ const normalizeText = (input = '') =>
     .trim();
 
 const containsBannedTerm = (text) => {
-  const normalized = ` ${normalizeText(text)} `;
+  const normalized = normalizeText(text);
+  // Pad with spaces for word-boundary matching on single words
+  const padded = ` ${normalized} `;
 
   for (const term of BANNED_TERMS) {
-    const token = ` ${term} `;
-    if (normalized.includes(token)) {
-      return term;
+    if (term.includes(' ')) {
+      // Multi-word phrase: check as substring in normalized text
+      if (normalized.includes(term)) return term;
+    } else {
+      // Single word: match on word boundaries (space-padded)
+      if (padded.includes(` ${term} `)) return term;
     }
   }
 
