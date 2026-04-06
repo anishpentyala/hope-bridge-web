@@ -161,6 +161,8 @@ export const createLocalStory = async ({ title, author_name, content, topic, med
       const deduped = stories.filter((story) => story.id !== supabaseStory.id);
       deduped.unshift(supabaseStory);
       writeStories(deduped);
+      // Send email notification (non-blocking)
+      notifyNewPost(supabaseStory).catch(() => {});
       return supabaseStory;
     }
   } catch (error) {
@@ -213,6 +215,46 @@ export const mergeStories = (remoteStories = [], localStories = []) => {
   }
 
   return merged.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+};
+
+export const deleteSupabaseStory = async (storyId) => {
+  if (!hasSupabaseConfig()) return false;
+
+  try {
+    await supabaseRequest(`/stories?id=eq.${encodeURIComponent(storyId)}`, {
+      method: 'DELETE'
+    });
+    // Also remove from local storage
+    const stories = readStories();
+    writeStories(stories.filter((s) => s.id !== storyId));
+    return true;
+  } catch (error) {
+    console.error('Failed to delete story from Supabase:', error);
+    return false;
+  }
+};
+
+export const notifyNewPost = async (story) => {
+  if (!hasSupabaseConfig()) return;
+
+  try {
+    await fetch(`${SUPABASE_URL}/functions/v1/notifyNewPost`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({
+        title: story.title,
+        topic: story.topic,
+        content: story.content,
+        author_name: story.author_name
+      })
+    });
+  } catch (error) {
+    // Email notification is non-critical, don't block the user
+    console.error('Failed to send new post notification:', error);
+  }
 };
 
 export const isSupabaseConfigured = hasSupabaseConfig;
